@@ -29,6 +29,20 @@ public class HuffmanKoodaus {
     public static HuffmanSolmu muodostaHuffmanPuu(int[] tiheystaulu) {
         int i;
         HuffmanSolmu vasen, oikea;
+        PriorityQueue<HuffmanSolmu> prjono = muodostaPrioriteettijono(tiheystaulu);
+
+        while (prjono.size() > 1) {
+            vasen = prjono.remove();
+            oikea = prjono.remove();
+            System.out.println("Yhdistetään: " + vasen.getTiheys() + ", " + oikea.getTiheys());
+            prjono.add(new HuffmanSolmu('\0', vasen.getTiheys() + oikea.getTiheys(), vasen, oikea));
+        }
+        return prjono.remove();
+
+    }
+
+    public static PriorityQueue<HuffmanSolmu> muodostaPrioriteettijono(int[] tiheystaulu) {
+        int i;
         PriorityQueue<HuffmanSolmu> prjono = new PriorityQueue<HuffmanSolmu>();
         for (i = 0; i < tiheystaulu.length; i++) {
             if (tiheystaulu[i] > 0) {
@@ -36,28 +50,20 @@ public class HuffmanKoodaus {
                 System.out.println("Lisätty solmu " + (char) i);
             }
         }
-
-        while (prjono.size() > 1) {
-            vasen = prjono.remove();
-            oikea = prjono.remove();
-            prjono.add(new HuffmanSolmu('\0', vasen.getTiheys() + oikea.getTiheys(), vasen, oikea));
-        }
-        return prjono.remove();
-
+        return prjono;
     }
 
     public static void muodostaKooditaulu(HuffmanSolmu solmu, String koodi, String[] kooditaulu) {
-        if( solmu.onLehti()) {
+        if (solmu.onLehti()) {
             System.out.println("Löytyi solmu: " + solmu.getMerkki());
-            kooditaulu[(int) (solmu.getMerkki())]=koodi;
+            kooditaulu[(int) (solmu.getMerkki())] = koodi;
+            return;
         }
-        
-        if (solmu.getVasen() != null) {
-            muodostaKooditaulu(solmu.getVasen(), koodi + "0", kooditaulu);
-        }
-        if (solmu.getOikea() != null) {
-            muodostaKooditaulu(solmu.getOikea(), koodi + "1", kooditaulu);
-        }
+
+        muodostaKooditaulu(solmu.getVasen(), koodi + "0", kooditaulu);
+
+        muodostaKooditaulu(solmu.getOikea(), koodi + "1", kooditaulu);
+
     }
 
 }

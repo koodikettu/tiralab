@@ -24,6 +24,7 @@ public class Pakkaus {
         HuffmanSolmu huffmanPuu;
 
         String merkkijono = "this is an example for huffman encoding";
+        merkkijono = "kissa";
         tiheystaulu = HuffmanKoodaus.muodostaTiheystaulu(merkkijono);
 
         for (i = 0; i < tiheystaulu.length; i++) {
