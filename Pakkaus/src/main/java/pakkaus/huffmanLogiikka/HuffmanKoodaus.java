@@ -1,17 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *  HuffmanKoodaus-luokka tarjoaa merkkijonon Huffman-koodauksessa tarvittavat apumetodit.
  */
 package pakkaus.huffmanLogiikka;
 
 import java.util.PriorityQueue;
 
-/**
- *
- * @author Markku
- */
+
 public class HuffmanKoodaus {
+    
+/**
+ * muodostaTiheystaulu-metodi muodostaa parametrinä annetun merkkijonon pohjalta taulukon,
+ * josta käy ilmi jokaisen ASCII-merkin esiintymien lukumäärä ko. merkkijonossa
+ * @param merkkijono
+ * @return metodi palauttaa eri merkkien esiintymiskerrat sisältävän int-taulukon
+ */
 
     public static int[] muodostaTiheystaulu(String merkkijono) {
 
@@ -25,6 +27,18 @@ public class HuffmanKoodaus {
         return taulukko;
 
     }
+    
+    /**
+     * muodostaHuffmanPuu-metodi muodostaa parametrinä annetun taulukon perusteella
+     * Huffman-puun. Taulukko sisältää merkkien esiintymistiheydet koodattavassa merkkijonossa.
+     * muodostaHuffmanPuu-metodi kutsuu ensin apumetodia muodostaPrioriteettijono. Metodi poistaa
+     * prioriteettijonosta aina kaksi alimman esiintymistiheyden omaavaa Huffman-solmua ja yhdistää
+     * nämä uuden Huffman-solmun lapsiksi. Uusi solmu lisätään prioriteettijonoon. Näin jatketaan,
+     * jonossa on jäljellä enää yksi solmu. Tällöin Huffman-puu on valmis ja jäljelläoleva solmu on
+     * puun juuri.
+     * @param tiheystaulu; merkkien esiintymistiheydet sisältävä taulukko
+     * @return metodi palauttaa muodostetun Huffman-puun juurisolmun
+     */
 
     public static HuffmanSolmu muodostaHuffmanPuu(int[] tiheystaulu) {
         int i;
@@ -40,6 +54,16 @@ public class HuffmanKoodaus {
         return prjono.remove();
 
     }
+    
+    /**
+     * muodostaPrioriteettijono-metodi luo jokaista merkkijonossa esiintyvää merkkiä vastaavan
+     * Huffman-solmun ja lisää solmut prioriteettijonoon.
+     * 
+     * @param tiheystaulu; taulukko, joka sisältää merkkien esiintymistiheyden syötteenä olevassa
+     * merkkijonossa
+     * @return metodi palauttaa prioriteettijonon, joka sisältää kaikkia merkkijonossa esiintyneitä
+     * merkkejä vastaavat HuffmanSolmu-oliot
+     */
 
     public static PriorityQueue<HuffmanSolmu> muodostaPrioriteettijono(int[] tiheystaulu) {
         int i;
@@ -52,6 +76,19 @@ public class HuffmanKoodaus {
         }
         return prjono;
     }
+    
+    /**
+     * muodostaKooditaulu-metodi käy läpi parametrinä annetun Huffman-puun esijärjestyksessä.
+     * Läpikäynnin yhteydessä se myös muodostaa merkkijonon, joka muodostaa kussakin lehtisolmussa
+     * olevaa merkkiä vastaavan binääriesityksen. Kun puussa edetään vasempaan haaraan (pienempi
+     * esiintymistiheys), binääriesitykseen lisätään 0, kun taas oikeaan haaraan edettäessä
+     * binääriesitykseen lisätään 1. Kun on saavutettu solmu, lisätään kyseisen merkin kohdalle
+     * kooditauluun ko. merkin binääriesitys.
+     * @param solmu Huffman-puun juurisolmu
+     * @param koodi koodi-muttuja pitää sisällään rekursion aikana muodostettavan binääriesityksen
+     * @param kooditaulu kooditaulu-taulukko sisältää kutakin merkkiä vastaavan binääriesityksen
+     * merkkijonomuodossa
+     */
 
     public static void muodostaKooditaulu(HuffmanSolmu solmu, String koodi, String[] kooditaulu) {
         if (solmu.onLehti()) {

@@ -1,5 +1,10 @@
-/*
- * Tällä hetkellä ohjelmassa on vasta hahmoteltu tiedoston lukua ja mock-pakkausalgoritmeja.
+/**
+ * Pääohjelma testaa tällä hetkellä Huffmankoodaus-luokan tarjoamia metodeita,
+ * jotka ovat muodostaTiheystaulu, muodostaHuffmanpuu ja muodostaKooditaulu.
+ * Ohjelma tulostaa merkkijono-muuttujassa määriteltyyn merkkijonoon pohjautuvan
+ * merkkieh tiheys- taulukon. Sen pohjalta luodaan Huffman-puu, jonka avulla
+ * luodaan kooditaulu, joka sisältää eri merkkien Huffman-koodatun
+ * binääriesityksen merkkijonomuodossa.
  */
 package pakkaus.pakkaus;
 
@@ -17,7 +22,10 @@ import java.util.Scanner;
 public class Pakkaus {
 
     /**
-     * @param args the command line arguments
+     * Pääohjelma, joka käyttää HuffmanKoodaus-luokan metodeja Huffman-koodaukseen tarvittavien
+     * aputietorakenteiden muodostamiseen annettuun merkkijonoon pohjautuen.
+     * 
+     * @param args komentoriviargumentit. Ohjelma ei tällä hetkellä käytä komentoriviargumentteja.
      */
     public static void main(String[] args) throws Exception {
         int i;
@@ -25,11 +33,11 @@ public class Pakkaus {
         String[] kooditaulu = new String[256];
         HuffmanSolmu huffmanPuu;
 
-        String merkkijono = "this is an example for huffman encoding";
-        merkkijono = "kissa";
-        merkkijono = "aaddddbbb";
+        String merkkijono = "tämä on esimerkki Huffman-koodauksesta";
+//        merkkijono = "kissa";
+//        merkkijono = "aaddddbbb";
         tiheystaulu = HuffmanKoodaus.muodostaTiheystaulu(merkkijono);
-
+        System.out.println("Tiheystaulu: ");
         for (i = 0; i < tiheystaulu.length; i++) {
             if (tiheystaulu[i] > 0) {
                 System.out.println(i + " (" + ((char) i) + "): " + tiheystaulu[i]);
@@ -38,7 +46,7 @@ public class Pakkaus {
         System.out.println("");
         huffmanPuu = HuffmanKoodaus.muodostaHuffmanPuu(tiheystaulu);
         HuffmanKoodaus.muodostaKooditaulu(huffmanPuu, "", kooditaulu);
-
+        System.out.println("Kooditaulu: ");
         for (i = 0; i < kooditaulu.length; i++) {
             if (kooditaulu[i] != null) {
                 System.out.println(i + " (" + ((char) i) + "): " + kooditaulu[i]);

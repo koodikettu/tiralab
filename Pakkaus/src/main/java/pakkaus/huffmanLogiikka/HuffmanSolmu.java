@@ -1,7 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * HuffmanSolmu -luokka toteutta Huffman-puun solmun.
  */
 package pakkaus.huffmanLogiikka;
 
@@ -38,6 +36,11 @@ public class HuffmanSolmu implements Comparable<HuffmanSolmu> {
     public char getMerkki() {
         return this.merkki;
     }
+    
+    /**
+     * onLehti-metodi palauttaa tiedon, onko ko. solmu puun lehtisolmu vai ei
+     * @return true, jos kyseessä on lehtisolmu, muuten false
+     */
     
     public boolean onLehti() {
         if (this.vasen==null && this.oikea==null)
