@@ -1,7 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Tämä testiluokka testaa huffman-Logiikka -pakkauksen metodeja.
  */
 package pakkaus.huffmanLogiikka;
 
@@ -45,6 +43,11 @@ public class HuffmanKoodausTest {
     //
     // @Test
     // public void hello() {}
+    
+    /**
+     * Testataan, muodostetaanko tiheystaulu oikein.
+     */
+    
     @Test
     public void muodostaTiheystauluTest1() {
         String mjono = "kissa";
@@ -57,6 +60,10 @@ public class HuffmanKoodausTest {
         assertEquals(taulukko[(int) 'f'], 0);
         assertEquals(taulukko[(int) '.'], 0);
     }
+    
+    /**
+     * Testataan muodostetaanko tiheystaulu oikein, kun merkkijono on tyhjä.
+     */
 
     @Test
     public void muodostaTiheystauluTest2() {
@@ -67,6 +74,11 @@ public class HuffmanKoodausTest {
             assertEquals(taulukko[i], 0);
         }
     }
+    
+    /**
+     * Testataan, muodostuuko prioriteettijono oikein ja saadaanko sieltä
+     * poistettavat merkit oikeassa järjestyksessä.
+     */
 
     @Test
     public void muodostaPrioriteettijonoTest() {
@@ -83,6 +95,10 @@ public class HuffmanKoodausTest {
         assertEquals(prjono.remove().getMerkki(), 'e');
 
     }
+    
+    /**
+     * Testataan, muodostetaanko Huffman-puu oikein.
+     */
 
     @Test
     public void muodostaHuffmanPuuTest() {
@@ -96,6 +112,10 @@ public class HuffmanKoodausTest {
         assertEquals(puu.getVasen().getTiheys(), 4);
         assertEquals(puu.getOikea().getTiheys(), 5);
     }
+    
+    /**
+     * Testataan, toimiiko kooditaulun muodostaminen Huffman-puusta oikein.
+     */
 
     @Test
     public void muodostaKooditauluTest() {

@@ -44,6 +44,13 @@ public class HuffmanKoodaus {
         int i;
         HuffmanSolmu vasen, oikea;
         PriorityQueue<HuffmanSolmu> prjono = muodostaPrioriteettijono(tiheystaulu);
+        
+        /* Niin kauan kuin prioriteettijonossa on enemmän kuin yksi solmu, poistetaan jonosta
+        kaksi pienimmän esiintymistiheyden solmua ja luodaan uusi solmu, josta tulee niiden
+        vanhempi ja jonka esiintymistiheydeksi tulee lasten yhteenlaskettu esiintymistiheys.
+        Lisätään uusi solmu prioriteettijonoon. Jatketaan tätä, kunnes jonossa on jäljellä
+        enää yksi solmu.
+        */
 
         while (prjono.size() > 1) {
             vasen = prjono.remove();
@@ -71,7 +78,6 @@ public class HuffmanKoodaus {
         for (i = 0; i < tiheystaulu.length; i++) {
             if (tiheystaulu[i] > 0) {
                 prjono.add(new HuffmanSolmu((char) i, tiheystaulu[i], null, null));
-//                System.out.println("Lisätty solmu " + (char) i);
             }
         }
         return prjono;
@@ -91,14 +97,14 @@ public class HuffmanKoodaus {
      */
 
     public static void muodostaKooditaulu(HuffmanSolmu solmu, String koodi, String[] kooditaulu) {
+        /* Jos ollaan päädytty lehtisolmuun, lisätään sitä vastaava binääriesitys kooditauluun */
         if (solmu.onLehti()) {
-//            System.out.println("Löytyi solmu: " + solmu.getMerkki());
             kooditaulu[(int) (solmu.getMerkki())] = koodi;
             return;
         }
-
+        /* Edetään Huffman-puussa vasempaan haaraan */
         muodostaKooditaulu(solmu.getVasen(), koodi + "0", kooditaulu);
-
+        /* Edetään Huffman-puussa oikeaan haaraan */
         muodostaKooditaulu(solmu.getOikea(), koodi + "1", kooditaulu);
 
     }
