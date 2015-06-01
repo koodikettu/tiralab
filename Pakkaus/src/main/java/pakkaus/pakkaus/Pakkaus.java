@@ -30,9 +30,16 @@ public class Pakkaus {
     public static void main(String[] args) throws Exception {
         int i;
         int[] tiheystaulu;
+        int[] pituustaulu;
         String[] kooditaulu = new String[256];
+        String[] kanonisoituKoodi = new String[256];
+        String ktmerkkijono;
+        String[] kooditaulu2 = new String[256];
         HuffmanSolmu huffmanPuu;
+        String pakattujono;
+        String tulosjono;
 
+        
         String merkkijono = "tämä on esimerkki Huffman-koodauksesta";
 //        merkkijono = "kissa";
 //        merkkijono = "aaddddbbb";
@@ -46,68 +53,51 @@ public class Pakkaus {
         System.out.println("");
         huffmanPuu = HuffmanKoodaus.muodostaHuffmanPuu(tiheystaulu);
         HuffmanKoodaus.muodostaKooditaulu(huffmanPuu, "", kooditaulu);
+        pituustaulu=HuffmanKoodaus.muodostaPituustaulu(kooditaulu);
         System.out.println("Kooditaulu: ");
         for (i = 0; i < kooditaulu.length; i++) {
             if (kooditaulu[i] != null) {
-                System.out.println(i + " (" + ((char) i) + "): " + kooditaulu[i]);
+                System.out.println(i + " (" + ((char) i) + "): " + kooditaulu[i] + ", pituus: " +pituustaulu[i]);
             }
         }
 
-//        // TODO code application logic here
-//        String tiedostonNimi;
-//        File lahde, kohde;
-//        FileInputStream fis, fisKohde;
-//        FileOutputStream fos;
-//        char merkki;
-//
-//        int valinta;
-//        Scanner lukija = new Scanner(System.in);
-//        System.out.println("Anna pakattavan tiedoston nimi: ");
-//        tiedostonNimi = lukija.next();
-//        lahde = new File(tiedostonNimi);
-//        fis = new FileInputStream(lahde);
-//        fos = new FileOutputStream(tiedostonNimi + ".pakattu");
-//        System.out.println("Valitse käytettävä pakkausalgoritmi:");
-//        System.out.println("1. Ei pakkausta");
-//        System.out.println("2. Joka toinen merkki");
-//        valinta = lukija.nextInt();
-//        if (valinta == 1) {
-//            eiPakkausta(fis, fos);
-//        } else {
-//            jokaToinen(fis, fos);
-//        }
-//        fis.close();
-//        fos.close();
-//        fis = new FileInputStream(lahde);
-//        fisKohde = new FileInputStream(tiedostonNimi + ".pakattu");
-//        System.out.println("Lähde: " + fis.getChannel().size());
-//        System.out.println("Kohde: " + fisKohde.getChannel().size());
-//
-//
-//    }
-//
-//    public static void eiPakkausta(FileInputStream fis, FileOutputStream fos) throws Exception {
-//        while (fis.available() > 0) {
-//            fos.write(fis.read());
-//        }
-//
-//    }
-//
-//    public static void jokaToinen(FileInputStream fis, FileOutputStream fos) throws Exception {
-//        int i = 0;
-//        int b;
-//        while (fis.available() > 0) {
-//            if (i == 0) {
-//                b = fis.read();
-//                fos.write(b);
-//                i = 1;
-//
-//            } else {
-//                fis.read();
-//                i = 0;
-//
-//            }
-//        }
+        ktmerkkijono=HuffmanKoodaus.tallennaKooditaulu(kooditaulu);
+        System.out.println(ktmerkkijono);
+        System.out.println(ktmerkkijono.length());
+        kooditaulu=HuffmanKoodaus.muodostaKooditauluMerkkijonosta(ktmerkkijono);
+        
+        System.out.println("Kooditaulu: ");
+        for (i = 0; i < kooditaulu.length; i++) {
+            if (kooditaulu[i] != null) {
+                System.out.println(i + " (" + ((char) i) + "): " + kooditaulu[i] + ", pituus: " +pituustaulu[i]);
+            }
+        }
+        
+        String pakattuBittijono=HuffmanKoodaus.koodaaBittijonoksi(merkkijono, kooditaulu);
+        System.out.println(pakattuBittijono);
+        int bittipituus=pakattuBittijono.length();
+        System.out.println(bittipituus);
+        String pakattuMerkkijono=HuffmanKoodaus.bititMerkkijonoksi(pakattuBittijono);
+        System.out.println(pakattuMerkkijono);
+        String purettuBittijono=HuffmanKoodaus.merkitBittijonoksi(pakattuMerkkijono, bittipituus);
+        System.out.println(purettuBittijono);
+        if(pakattuBittijono.equals(purettuBittijono))
+            System.out.println("Bittijonot samat!");
+        tulosjono=HuffmanKoodaus.palautaMerkkijonoksi(purettuBittijono, kooditaulu);
+        System.out.println("tulosjono:");
+        System.out.println(tulosjono);
+        System.out.println("Alkuperäisen merkkijonon pituus: " + merkkijono.length());
+        System.out.println("Pakatun merkkijonon pituus ilman kooditaulua: " + pakattuMerkkijono.length());
+        System.out.println("Kooditaulun pituus: " + ktmerkkijono.length());
+        System.out.println("Pakkaussuhde: " + ((double)(pakattuMerkkijono.length()))/merkkijono.length());
+
+        
+
+
     }
+
+    
+
+    
 
 }
