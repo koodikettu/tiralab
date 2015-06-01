@@ -6,7 +6,9 @@
 package pakkaus.huffmanLogiikka;
 
 /**
- *
+ * Tämä luokka ei ole osa ohjelman tämänhetkistä toiminnallisuutta. Mahdollisesti kuitenkin
+ * tulee käyttöön parannelluissa versioissa.
+ * 
  * @author Markku
  */
 public class HuffmanPari implements Comparable<HuffmanPari> {

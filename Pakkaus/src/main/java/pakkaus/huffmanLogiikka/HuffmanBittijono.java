@@ -6,6 +6,8 @@
 package pakkaus.huffmanLogiikka;
 
 /**
+ * Tämä luokka ei ole osa ohjelman tämänhetkistä toiminnallisuutta. Tätä hyödynnetään mahdollisesti
+ * parannetussa versiossa.
  *
  * @author Markku
  */
