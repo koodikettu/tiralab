@@ -114,6 +114,14 @@ public class HuffmanKoodaus {
         muodostaKooditaulu(solmu.getOikea(), koodi + "1", kooditaulu);
 
     }
+    
+    /**
+     * Metodi muodostaa taulukon, joka sisältää tiedon siitä, kuinka monella bitillä
+     * kukin merkki esitetään pakatussa datassa.
+     * 
+     * @param kooditaulu taulukko, joka sisältää koodauksessa käytettävät binäärikoodit
+     * @return paluuarvona on taulukko, joka sisältää merkkien binääriesitysten bittien määrät
+     */
 
     public static int[] muodostaPituustaulu(String[] kooditaulu) {
         int i;
@@ -128,6 +136,13 @@ public class HuffmanKoodaus {
         return pituustaulu;
 
     }
+    
+    /**
+     * Metodi muodostaa merkkijonoesityksen kooditaulusta.
+     * 
+     * @param kooditaulu Parametrinä annetaan taulukko, joka sisältää kunkin merkin binääriesityksen.
+     * @return Paluuarvona kooditaulu merkkijonomuodossa. Merkit erotetaan toisistaan kaksoispisteellä.
+     */
 
     public static String tallennaKooditaulu(String[] kooditaulu) {
         String tulos = "";
@@ -142,6 +157,13 @@ public class HuffmanKoodaus {
         tulos += ":";
         return tulos;
     }
+    
+    /**
+     * Metodi palauttaa edellisellä metodilla luodun kooditaulun merkkijonoesitysen taulukon muotoon.
+     * 
+     * @param mjono Kooditaulun merkkijonoesitys
+     * @return kooditaulun taulukkoesitys
+     */
 
     public static String[] muodostaKooditauluMerkkijonosta(String mjono) {
         String[] kooditaulu = new String[256];
@@ -166,6 +188,15 @@ public class HuffmanKoodaus {
 
         return kooditaulu;
     }
+    
+    /**
+     * Metodi muodostaa merkkijonon, jossa alkuperäisen syötteen jokainen merkki on korvattu kooditaulun
+     * mukaisella binääriesityksellä. Pakkausvaiheen metodi.
+     * 
+     * @param merkkijono alkuperäinen pakattava merkkijono
+     * @param kooditaulu merkkien binäärikoodit sisältävä taulukko
+     * @return merkkijono, joka sisältää alkuperäisen pakattavan merkkijonon binääriesityksen
+     */
 
     public static String koodaaBittijonoksi(String merkkijono, String[] kooditaulu) {
         String pakattuBjono = "";
@@ -176,6 +207,17 @@ public class HuffmanKoodaus {
         }
         return pakattuBjono;
     }
+    
+    /**
+     * Purkamisen toisen vaiheen metodi, joka etsii bittijonomuodossa olevasta aineistosta sellaisia
+     * bittisarjoja, joille löytyy kooditaulusta vastine. Paluuarvona on merkkijono, joka sisältää
+     * kooditaulusta löytyneet bittisarjoja vastaavat merkit. Tämä on alkuperäinen syötteenä ohjelmalle
+     * annettu merkkijono.
+     * 
+     * @param bittijono binääriesitys merkkijonomuodossa
+     * @param kooditaulu taulukko, joka sisältää kunkin merkin binäärikoodauksen
+     * @return palauttaa alkuperäiseen muotoonsa puretun merkkijonon
+     */
 
     public static String palautaMerkkijonoksi(String bittijono, String[] kooditaulu) {
         String tulosjono = "";
@@ -195,6 +237,15 @@ public class HuffmanKoodaus {
         return tulosjono;
 
     }
+    /**
+     * Metodi toteuttaa purkamisen ensimmäisen vaiheen, eli muuttaa pakatun merkkijonon bittijonoksi.
+     * 
+     * @param merkkijono pakattu data
+     * @param pituus pakkaamattoman bittijonon pituus, jota käytetään sen selvittämiseen, mitä tehdä
+     * viimeisen, mahdollisesti epätäyden tavun kohdalla
+     * @return bittiesitys merkkijonona
+     */
+    
 
     public static String merkitBittijonoksi(String merkkijono, int pituus) {
         int vajaatavu = pituus % 8;
@@ -218,6 +269,14 @@ public class HuffmanKoodaus {
         return bittijono;
 
     }
+    
+    /**
+     * Metodi muuttaa alkuperäisen datan binääriesityksen jälleen merkkijonomuotoon jakamalla sen
+     * kahdeksan bitin pätkiin ja korvaamalla kunkin pätkän vastaavalla merkillä. Pakkausvaiheen metodi.
+     * 
+     * @param bittijono Ykkösiä ja nollia sisältävä merkkijonoesitys.
+     * @return merkkijono, bittijono on muutettu tavuittain merkeiksi
+     */
 
     public static String bititMerkkijonoksi(String bittijono) {
         int i;

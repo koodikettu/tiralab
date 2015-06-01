@@ -1,10 +1,6 @@
 /**
- * Pääohjelma testaa tällä hetkellä Huffmankoodaus-luokan tarjoamia metodeita,
- * jotka ovat muodostaTiheystaulu, muodostaHuffmanpuu ja muodostaKooditaulu.
- * Ohjelma tulostaa merkkijono-muuttujassa määriteltyyn merkkijonoon pohjautuvan
- * merkkieh tiheys- taulukon. Sen pohjalta luodaan Huffman-puu, jonka avulla
- * luodaan kooditaulu, joka sisältää eri merkkien Huffman-koodatun
- * binääriesityksen merkkijonomuodossa.
+ * Pääohjelmalla voi tällä hetkellä testata merkkijono-muuttujassa määriteltävän merkkijonon pakkaamista.
+ * Ohjelma toimii periaatteessa, joskin bugeja on vielä korjattavana.
  */
 package pakkaus.pakkaus;
 
@@ -62,16 +58,18 @@ public class Pakkaus {
         }
 
         ktmerkkijono=HuffmanKoodaus.tallennaKooditaulu(kooditaulu);
+        System.out.println("Kooditaulu merkkijonona:");
         System.out.println(ktmerkkijono);
+        System.out.println("Kooditaulun merkkkijonoesityksen pituus:");
         System.out.println(ktmerkkijono.length());
         kooditaulu=HuffmanKoodaus.muodostaKooditauluMerkkijonosta(ktmerkkijono);
         
-        System.out.println("Kooditaulu: ");
-        for (i = 0; i < kooditaulu.length; i++) {
-            if (kooditaulu[i] != null) {
-                System.out.println(i + " (" + ((char) i) + "): " + kooditaulu[i] + ", pituus: " +pituustaulu[i]);
-            }
-        }
+//        System.out.println("Kooditaulu: ");
+//        for (i = 0; i < kooditaulu.length; i++) {
+//            if (kooditaulu[i] != null) {
+//                System.out.println(i + " (" + ((char) i) + "): " + kooditaulu[i] + ", pituus: " +pituustaulu[i]);
+//            }
+//        }
         
         String pakattuBittijono=HuffmanKoodaus.koodaaBittijonoksi(merkkijono, kooditaulu);
         System.out.println(pakattuBittijono);
