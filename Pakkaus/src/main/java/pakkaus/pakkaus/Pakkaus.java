@@ -1,7 +1,7 @@
 /**
- * Pääohjelmalla voi tällä hetkellä testata tiedoston pakkaamista.
- * Testiaineisto määritellään muuttujassa tiedostonimi. Tähän mennessä
- * havaitut bugit, joita viime viikolla vielä oli, on pääsääntöisesti korjattu.
+ * Pääohjelmalla voi tällä hetkellä testata tiedoston pakkaamista. Testiaineisto
+ * määritellään muuttujassa tiedostonimi. Tähän mennessä havaitut bugit, joita
+ * viime viikolla vielä oli, on pääsääntöisesti korjattu.
  *
  */
 package pakkaus.pakkaus;
@@ -30,10 +30,11 @@ public class Pakkaus {
      * komentoriviargumentteja.
      */
     public static void main(String[] args) throws Exception {
-        
-        final String tiedostonimi="testidata.txt";
-        
+
+        final String tiedostonimi = "testidata.txt";
+
         int i;
+        long alkuaika, loppuaika;
         int[] tiheystaulu;
         int[] pituustaulu;
         String[] kooditaulu = new String[256];
@@ -55,7 +56,7 @@ public class Pakkaus {
 
         psyote.mark(1024 * 1024);
         int alkuperainenPituus = psyote.available();
-
+        alkuaika = System.currentTimeMillis();
         tiheystaulu = HuffmanKoodaus.muodostaTiheystaulu(psyote);
         System.out.println("Tiheystaulu: ");
         for (i = 0; i < tiheystaulu.length; i++) {
@@ -92,6 +93,7 @@ public class Pakkaus {
 
         /* jaannosbitit kertovat viimeisen tallennettavan tavun "tehollisten" bittien määrän */
         int jaannosbitit = HuffmanKoodaus.koodaaBittijonoksi(psyote, ptuote, kooditaulu);
+        loppuaika = System.currentTimeMillis();
 
         /* suljetaan tiedostot */
         psyote.close();
@@ -100,6 +102,8 @@ public class Pakkaus {
         fos.close();
         System.out.println("Pakattu!");
         System.out.println("Jäännösbitit: " + jaannosbitit);
+
+        long pakkausaika = loppuaika - alkuaika;
 
         /* avataan pakattu tiedosto lukemista varten sen purkamiseksi */
         File pakattutiedosto = new File("pakattu.dat");
@@ -113,16 +117,19 @@ public class Pakkaus {
         BufferedOutputStream purettu = new BufferedOutputStream(pfos);
 
         System.out.println("Puretaan...");
+        alkuaika = System.currentTimeMillis();
         HuffmanKoodaus.puraMerkkijonoksi(ppakattu, purettu, jaannosbitit, kooditaulu);
         System.out.println("Purettu!");
-
+        loppuaika = System.currentTimeMillis();
         ppakattu.close();
         pakattu.close();
         purettu.close();
         pfos.close();
-
+        long purkuaika = loppuaika - alkuaika;
         System.out.println("Alkuperäisen tiedoston koko: " + alkuperainenPituus);
         System.out.println("Pakatun tiedoston koko: " + pakattuPituus);
+        System.out.println("Pakkaamiseen kulunut aika " + pakkausaika + "  ms.");
+        System.out.println("Purkamiseen kulunut aika " + purkuaika + "  ms.");
         System.out.println("Pakkaussuhde: " + (double) pakattuPituus / alkuperainenPituus);
 
     }
