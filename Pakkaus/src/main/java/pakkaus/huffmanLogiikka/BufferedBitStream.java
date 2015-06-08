@@ -1,15 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Tämä luokka toteuttaa puskuroidun bittivirran, joka mahdollistaa datan lukemisen tiedostosta
+ * bitti kerrallaan.
+ * 
  */
 package pakkaus.huffmanLogiikka;
 
 import java.io.BufferedInputStream;
 
 /**
+ * Luokka lukee BufferedInputStreamistä dataa tavu kerrallaan ja tallettaa sen binäärimerkkijonona
+ * muuttujaan tavuBitteinä. Metodi seuraava mahdollistaa tavuBitteinä-muuttujan sisällön lukemisen
+ * bitti kerrallaan.
  *
- * @author Markku
  */
 public class BufferedBitStream {
 
@@ -29,6 +31,12 @@ public class BufferedBitStream {
             System.out.println("Ei löydy mittään");
         }
     }
+    
+    /**
+     * Metodi kertoo, onko bittejä vielä luettavissa tiedostosta.
+     * 
+     * @return true, jos bittejä on luettavissa, muuten false 
+     */
 
     public boolean available() {
         if (tavuBitteina.length() > 0) {
@@ -37,6 +45,12 @@ public class BufferedBitStream {
         return false;
     }
 
+    /**
+     * palauttaa seuraavan bitin
+     * @return joko '0' tai '1'
+     * @throws Exception 
+     */
+    
     public char seuraava() throws Exception {
         
         char a;
@@ -66,6 +80,12 @@ public class BufferedBitStream {
             return a;
         }
     }
+    
+    /**
+     * Täydentää puuttuvat alkunollat, koska toBinaryString ei niitä huomioi. Näin varmistetaan,
+     * että jokaisessa tavussa on täsmälleen 8 bittiä.
+     * 
+     */
     
     public void taydenna() {
         while(tavuBitteina.length()<8)
