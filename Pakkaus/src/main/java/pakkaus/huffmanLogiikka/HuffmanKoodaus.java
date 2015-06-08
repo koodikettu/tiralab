@@ -6,14 +6,10 @@ package pakkaus.huffmanLogiikka;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.PriorityQueue;
 import pakkaus.omatTietorakenteet.Prioriteettijono;
 
 public class HuffmanKoodaus {
-
+    
     /**
      * muodostaTiheystaulu-metodi muodostaa parametrinä annetun merkkijonon
      * pohjalta taulukon, josta käy ilmi jokaisen ASCII-merkin esiintymien
@@ -35,6 +31,18 @@ public class HuffmanKoodaus {
         return taulukko;
 
     }
+
+    /**
+     * muodostaTiheystaulu-metodi muodostaa parametrinä annetun BufferedInputStreamin
+     * pohjalta taulukon, josta käy ilmi jokaisen ASCII-merkin esiintymien
+     * lukumäärä ko. merkkijonossa. edellisen metodin ylikuormitettu versio, joka ottaa
+     * parametrinä merkkijonomuuttujan sijaan BufferedInputStream-olion
+     *
+     * @param syote BufferedInputStream-olio, jonka avulla luetaan dataa tiedostosta
+     * @return metodi palauttaa eri merkkien esiintymiskerrat sisältävän
+     * int-taulukon
+     */
+
 
     public static int[] muodostaTiheystaulu(BufferedInputStream syote) throws Exception {
 
@@ -211,16 +219,15 @@ public class HuffmanKoodaus {
         return kooditaulu;
     }
 
-    /**
-     * Metodi muodostaa merkkijonon, jossa alkuperäisen syötteen jokainen merkki
-     * on korvattu kooditaulun mukaisella binääriesityksellä. Pakkausvaiheen
-     * metodi.
-     *
-     * @param merkkijono alkuperäinen pakattava merkkijono
-     * @param kooditaulu merkkien binäärikoodit sisältävä taulukko
-     * @return merkkijono, joka sisältää alkuperäisen pakattavan merkkijonon
-     * binääriesityksen
-     */
+/**
+ * Metodi koodaa lähdetiedostosta luettavan datan jokaisen merkin sen kooditaulusta
+ * löytyvällä binääriesityksellä ja tallettaa näin saadun datan toiseen tiedostoon.
+ * @param syote BufferedInputStream-olio, jonka avulla luetaan dataa tiedostosta.
+ * @param tuote BufferedOutputStream-olio, jonka avulla kirjoitetaan dataa tiedostoon.
+ * @param kooditaulu jokaisen merkin binäärikoodin sisältävä taulukko
+ * @return palauttaa viimeisen mahdollisesti vajaaksi jäävän tavun tehollisten bittien määrän
+ * @throws Exception 
+ */
 
 
     public static int koodaaBittijonoksi(BufferedInputStream syote, BufferedOutputStream tuote, String[] kooditaulu) throws Exception {
@@ -258,7 +265,15 @@ public class HuffmanKoodaus {
         return jaannosbitit;
     }
 
-
+    /**
+     * Metodi lukee dataa pakatusta tiedostosta ja etsii vastaavia bittijaksoja kooditaulusta. Kun
+     * vastaava koodi löytyy, kirjoitetaan vastaava tavu kohdetiedostoon.
+     * @param pakattu BufferedInputStream-olio, jonka avulla luetaan dataa tiedostosta
+     * @param purettu BufferedOutputStream-olio, jonka avulla kirjoitetaan dataa tiedostoon
+     * @param jaannosbitit viimeisessä (vajaassa) tavussa olevien tehollisten bittien määrä
+     * @param kooditaulu kunkin merkin binäärikoodauksen sisältävä taulukko
+     * @throws Exception 
+     */
 
     public static void puraMerkkijonoksi(BufferedInputStream pakattu, BufferedOutputStream purettu, int jaannosbitit, String[] kooditaulu) throws Exception {
         String tulosjono = "";
@@ -278,60 +293,24 @@ public class HuffmanKoodaus {
             }
 
         }
-        System.out.println(bbs.available());
+//        System.out.println(bbs.available());
 
     }
 
     
 
-    public static String puraBittijonoksi(BufferedInputStream pakattu, BufferedOutputStream purettuBittivirta) throws Exception {
-        String apu = "";
-        String verrattava = "";
-        int i = 0;
-        while (pakattu.available() > 1) {
 
-            apu += Integer.toBinaryString(pakattu.read());
 
-        }
-        return apu;
-
-    }
-
+    
+    
     /**
-     * Metodi muuttaa alkuperäisen datan binääriesityksen jälleen
-     * merkkijonomuotoon jakamalla sen kahdeksan bitin pätkiin ja korvaamalla
-     * kunkin pätkän vastaavalla merkillä. Pakkausvaiheen metodi.
-     *
-     * @param bittijono Ykkösiä ja nollia sisältävä merkkijonoesitys.
-     * @return merkkijono, bittijono on muutettu tavuittain merkeiksi
+     * 
+     * Metodi muodostaa merkkijonomuuttujassa annetun bittijonon perusteella 8-bittisen
+     * tavun tallennettavaksi binääritiedostoon.
+     * 
+     * @param jono merkkijonona talletettu binääriluku
+     * @return parametrin perusteella muodostettu 8-bittinen tavu
      */
-    public static String bititMerkkijonoksi(String bittijono) {
-        int i;
-        char merkki;
-        String tulosjono = "";
-        String apujono = "";
-        for (i = 0; i < bittijono.length(); i++) {
-            apujono += bittijono.charAt(i);
-            if (apujono.length() == 8) {
-                merkki = (char) Integer.parseInt(apujono, 2);
-                tulosjono += merkki;
-                apujono = "";
-            }
-
-        }
-        if (apujono.length() > 0) {
-            System.out.println("Jäi ylimääräistä: " + apujono);
-            while (apujono.length() < 8) {
-                apujono += "0";
-            }
-            System.out.println("Täydennetty: " + apujono);
-            merkki = (char) Integer.parseInt(apujono, 2);
-            tulosjono += merkki;
-        }
-
-        return tulosjono;
-
-    }
 
     public static int bittijonoTavuksi(String jono) {
         int tavu;
@@ -343,6 +322,14 @@ public class HuffmanKoodaus {
             return tavu;
         }
     }
+    
+    /**
+     * Metodi täydentää viimeisen pakattavan tavun, jos siihen ei tule täyttä 8 bittiä.
+     * perään lisätään nollia, kunnes tavussa on 8 bittiä.
+     * 
+     * @param jono viimeisen vajaan tavun "teholliset" bitit
+     * @return nollilla 8-bittiseksi täydennetty viimeinen tavu
+     */
 
     public static int taydennaVajaaTavu(String jono) {
         while (jono.length() < 8) {
