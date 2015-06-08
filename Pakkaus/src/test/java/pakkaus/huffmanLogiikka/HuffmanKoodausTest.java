@@ -12,6 +12,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import pakkaus.huffmanLogiikka.HuffmanKoodaus;
 import pakkaus.huffmanLogiikka.HuffmanSolmu;
+import pakkaus.omatTietorakenteet.Prioriteettijono;
 
 /**
  *
@@ -83,16 +84,16 @@ public class HuffmanKoodausTest {
     @Test
     public void muodostaPrioriteettijonoTest() {
         String mjono = " abbddddeeeeeccc";
-        PriorityQueue<HuffmanSolmu> prjono;
+        Prioriteettijono prjono;
         int[] taulukko;
         taulukko = HuffmanKoodaus.muodostaTiheystaulu(mjono);
         prjono = HuffmanKoodaus.muodostaPrioriteettijono(taulukko);
-        assertEquals(prjono.remove().getMerkki(), ' ');
-        assertEquals(prjono.remove().getMerkki(), 'a');
-        assertEquals(prjono.remove().getMerkki(), 'b');
-        assertEquals(prjono.remove().getMerkki(), 'c');
-        assertEquals(prjono.remove().getMerkki(), 'd');
-        assertEquals(prjono.remove().getMerkki(), 'e');
+        assertEquals(prjono.delMin().getMerkki(), ' ');
+        assertEquals(prjono.delMin().getMerkki(), 'a');
+        assertEquals(prjono.delMin().getMerkki(), 'b');
+        assertEquals(prjono.delMin().getMerkki(), 'c');
+        assertEquals(prjono.delMin().getMerkki(), 'd');
+        assertEquals(prjono.delMin().getMerkki(), 'e');
 
     }
     
@@ -130,5 +131,13 @@ public class HuffmanKoodausTest {
         assertEquals(kooditaulu[(int) 'a'].equals("10"), true);
         assertEquals(kooditaulu[(int) 'b'].equals("11"), true);
         assertEquals(kooditaulu[(int) 'd'].equals("0"), true);
+    }
+    
+    @Test
+    public void bittijonoTavuksiTest() {
+        String jono="111111111";
+        int tavu = HuffmanKoodaus.bittijonoTavuksi(jono);
+        System.out.println("Tavu: " + tavu);
+        System.out.println("Jono: " + jono);
     }
 }

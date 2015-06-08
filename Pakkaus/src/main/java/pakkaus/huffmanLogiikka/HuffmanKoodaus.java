@@ -4,10 +4,13 @@
  */
 package pakkaus.huffmanLogiikka;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.PriorityQueue;
+import pakkaus.omatTietorakenteet.Prioriteettijono;
 
 public class HuffmanKoodaus {
 
@@ -33,6 +36,21 @@ public class HuffmanKoodaus {
 
     }
 
+    public static int[] muodostaTiheystaulu(BufferedInputStream syote) throws Exception {
+
+        int i;
+        int[] taulukko = new int[256];
+        int b;
+
+        while (syote.available() > 0) {
+            b = syote.read();
+            taulukko[b]++;
+
+        }
+        return taulukko;
+
+    }
+
     /**
      * muodostaHuffmanPuu-metodi muodostaa parametrinä annetun taulukon
      * perusteella Huffman-puun. Taulukko sisältää merkkien esiintymistiheydet
@@ -46,10 +64,31 @@ public class HuffmanKoodaus {
      * @param tiheystaulu; merkkien esiintymistiheydet sisältävä taulukko
      * @return metodi palauttaa muodostetun Huffman-puun juurisolmun
      */
+//    public static HuffmanSolmu muodostaHuffmanPuu(int[] tiheystaulu) {
+//        int i;
+//        HuffmanSolmu vasen, oikea;
+//        PriorityQueue<HuffmanSolmu> prjono = muodostaPrioriteettijono(tiheystaulu);
+//
+//        /* Niin kauan kuin prioriteettijonossa on enemmän kuin yksi solmu, poistetaan jonosta
+//         kaksi pienimmän esiintymistiheyden solmua ja luodaan uusi solmu, josta tulee niiden
+//         vanhempi ja jonka esiintymistiheydeksi tulee lasten yhteenlaskettu esiintymistiheys.
+//         Lisätään uusi solmu prioriteettijonoon. Jatketaan tätä, kunnes jonossa on jäljellä
+//         enää yksi solmu.
+//         */
+//        while (prjono.size() > 1) {
+//            vasen = prjono.remove();
+//            oikea = prjono.remove();
+////            System.out.println("Yhdistetään: " + vasen.getTiheys() + ", " + oikea.getTiheys());
+//            prjono.add(new HuffmanSolmu('\0', vasen.getTiheys() + oikea.getTiheys(), vasen, oikea));
+//        }
+//        return prjono.remove();
+//
+//    }
+
     public static HuffmanSolmu muodostaHuffmanPuu(int[] tiheystaulu) {
         int i;
         HuffmanSolmu vasen, oikea;
-        PriorityQueue<HuffmanSolmu> prjono = muodostaPrioriteettijono(tiheystaulu);
+        Prioriteettijono prjono = muodostaPrioriteettijono(tiheystaulu);
 
         /* Niin kauan kuin prioriteettijonossa on enemmän kuin yksi solmu, poistetaan jonosta
          kaksi pienimmän esiintymistiheyden solmua ja luodaan uusi solmu, josta tulee niiden
@@ -57,13 +96,13 @@ public class HuffmanKoodaus {
          Lisätään uusi solmu prioriteettijonoon. Jatketaan tätä, kunnes jonossa on jäljellä
          enää yksi solmu.
          */
-        while (prjono.size() > 1) {
-            vasen = prjono.remove();
-            oikea = prjono.remove();
+        while (prjono.koko() > 1) {
+            vasen = prjono.delMin();
+            oikea = prjono.delMin();
 //            System.out.println("Yhdistetään: " + vasen.getTiheys() + ", " + oikea.getTiheys());
-            prjono.add(new HuffmanSolmu('\0', vasen.getTiheys() + oikea.getTiheys(), vasen, oikea));
+            prjono.insert(new HuffmanSolmu('\0', vasen.getTiheys() + oikea.getTiheys(), vasen, oikea));
         }
-        return prjono.remove();
+        return prjono.delMin();
 
     }
 
@@ -76,12 +115,22 @@ public class HuffmanKoodaus {
      * @return metodi palauttaa prioriteettijonon, joka sisältää kaikkia
      * merkkijonossa esiintyneitä merkkejä vastaavat HuffmanSolmu-oliot
      */
-    public static PriorityQueue<HuffmanSolmu> muodostaPrioriteettijono(int[] tiheystaulu) {
+//    public static PriorityQueue<HuffmanSolmu> muodostaPrioriteettijono(int[] tiheystaulu) {
+//        int i;
+//        PriorityQueue<HuffmanSolmu> prjono = new PriorityQueue<HuffmanSolmu>();
+//        for (i = 0; i < tiheystaulu.length; i++) {
+//            if (tiheystaulu[i] > 0) {
+//                prjono.add(new HuffmanSolmu((char) i, tiheystaulu[i], null, null));
+//            }
+//        }
+//        return prjono;
+//    }
+    public static Prioriteettijono muodostaPrioriteettijono(int[] tiheystaulu) {
         int i;
-        PriorityQueue<HuffmanSolmu> prjono = new PriorityQueue<HuffmanSolmu>();
+        Prioriteettijono prjono = new Prioriteettijono();
         for (i = 0; i < tiheystaulu.length; i++) {
             if (tiheystaulu[i] > 0) {
-                prjono.add(new HuffmanSolmu((char) i, tiheystaulu[i], null, null));
+                prjono.insert(new HuffmanSolmu((char) i, tiheystaulu[i], null, null));
             }
         }
         return prjono;
@@ -114,15 +163,16 @@ public class HuffmanKoodaus {
         muodostaKooditaulu(solmu.getOikea(), koodi + "1", kooditaulu);
 
     }
-    
-    /**
-     * Metodi muodostaa taulukon, joka sisältää tiedon siitä, kuinka monella bitillä
-     * kukin merkki esitetään pakatussa datassa.
-     * 
-     * @param kooditaulu taulukko, joka sisältää koodauksessa käytettävät binäärikoodit
-     * @return paluuarvona on taulukko, joka sisältää merkkien binääriesitysten bittien määrät
-     */
 
+    /**
+     * Metodi muodostaa taulukon, joka sisältää tiedon siitä, kuinka monella
+     * bitillä kukin merkki esitetään pakatussa datassa.
+     *
+     * @param kooditaulu taulukko, joka sisältää koodauksessa käytettävät
+     * binäärikoodit
+     * @return paluuarvona on taulukko, joka sisältää merkkien binääriesitysten
+     * bittien määrät
+     */
     public static int[] muodostaPituustaulu(String[] kooditaulu) {
         int i;
         int[] pituustaulu = new int[kooditaulu.length];
@@ -136,14 +186,15 @@ public class HuffmanKoodaus {
         return pituustaulu;
 
     }
-    
+
     /**
      * Metodi muodostaa merkkijonoesityksen kooditaulusta.
-     * 
-     * @param kooditaulu Parametrinä annetaan taulukko, joka sisältää kunkin merkin binääriesityksen.
-     * @return Paluuarvona kooditaulu merkkijonomuodossa. Merkit erotetaan toisistaan kaksoispisteellä.
+     *
+     * @param kooditaulu Parametrinä annetaan taulukko, joka sisältää kunkin
+     * merkin binääriesityksen.
+     * @return Paluuarvona kooditaulu merkkijonomuodossa. Merkit erotetaan
+     * toisistaan kaksoispisteellä.
      */
-
     public static String tallennaKooditaulu(String[] kooditaulu) {
         String tulos = "";
         int i;
@@ -154,20 +205,20 @@ public class HuffmanKoodaus {
                 tulos += ":";
             }
         }
-        tulos += ":";
+        tulos += "::";
         return tulos;
     }
-    
+
     /**
-     * Metodi palauttaa edellisellä metodilla luodun kooditaulun merkkijonoesitysen taulukon muotoon.
-     * 
+     * Metodi palauttaa edellisellä metodilla luodun kooditaulun
+     * merkkijonoesitysen taulukon muotoon.
+     *
      * @param mjono Kooditaulun merkkijonoesitys
      * @return kooditaulun taulukkoesitys
      */
-
     public static String[] muodostaKooditauluMerkkijonosta(String mjono) {
         String[] kooditaulu = new String[256];
-        char c;
+        char c, ed;
         int pituus;
         char koodi;
         String bittijono = "";
@@ -180,24 +231,24 @@ public class HuffmanKoodaus {
             kooditaulu[c] = bittijono;
             bittijono = "";
             i++;
-            if (mjono.charAt(i) == ':') {
+            if (mjono.charAt(i) == ':' && mjono.charAt(i + 1) == ':') {
                 break;
             }
-
         }
 
         return kooditaulu;
     }
-    
+
     /**
-     * Metodi muodostaa merkkijonon, jossa alkuperäisen syötteen jokainen merkki on korvattu kooditaulun
-     * mukaisella binääriesityksellä. Pakkausvaiheen metodi.
-     * 
+     * Metodi muodostaa merkkijonon, jossa alkuperäisen syötteen jokainen merkki
+     * on korvattu kooditaulun mukaisella binääriesityksellä. Pakkausvaiheen
+     * metodi.
+     *
      * @param merkkijono alkuperäinen pakattava merkkijono
      * @param kooditaulu merkkien binäärikoodit sisältävä taulukko
-     * @return merkkijono, joka sisältää alkuperäisen pakattavan merkkijonon binääriesityksen
+     * @return merkkijono, joka sisältää alkuperäisen pakattavan merkkijonon
+     * binääriesityksen
      */
-
     public static String koodaaBittijonoksi(String merkkijono, String[] kooditaulu) {
         String pakattuBjono = "";
 
@@ -207,18 +258,53 @@ public class HuffmanKoodaus {
         }
         return pakattuBjono;
     }
-    
+
+    public static int koodaaBittijonoksi(BufferedInputStream syote, BufferedOutputStream tuote, String[] kooditaulu) throws Exception {
+        String pakattuBjono = "";
+        int tavu;
+        int b;
+        int jaannosbitit;
+
+        while (syote.available() > 0) {
+            b = syote.read();
+//            System.out.println("Luettu merkki: " + (char) b + ": " + b);
+            pakattuBjono += kooditaulu[b];
+//            System.out.println("Käsittelyssä bittijono: " + pakattuBjono);
+            while (pakattuBjono.length() > 7) {
+                if (pakattuBjono.length() == 8) {
+//                    System.out.println("Kirjoitetaan bittijono: " + pakattuBjono);
+                    tavu = bittijonoTavuksi(pakattuBjono);
+                    pakattuBjono = "";
+                } else {
+//                    System.out.println("Kirj. bittijono: " + pakattuBjono.substring(0, 8));
+                    tavu = bittijonoTavuksi(pakattuBjono.substring(0, 8));
+                    pakattuBjono = pakattuBjono.substring(8, pakattuBjono.length());
+                }
+
+                tuote.write(tavu);
+            }
+
+        }
+        jaannosbitit = pakattuBjono.length();
+        if (jaannosbitit > 0) {
+            tavu = taydennaVajaaTavu(pakattuBjono);
+            tuote.write(tavu);
+        }
+
+        return jaannosbitit;
+    }
+
     /**
-     * Purkamisen toisen vaiheen metodi, joka etsii bittijonomuodossa olevasta aineistosta sellaisia
-     * bittisarjoja, joille löytyy kooditaulusta vastine. Paluuarvona on merkkijono, joka sisältää
-     * kooditaulusta löytyneet bittisarjoja vastaavat merkit. Tämä on alkuperäinen syötteenä ohjelmalle
+     * Purkamisen toisen vaiheen metodi, joka etsii bittijonomuodossa olevasta
+     * aineistosta sellaisia bittisarjoja, joille löytyy kooditaulusta vastine.
+     * Paluuarvona on merkkijono, joka sisältää kooditaulusta löytyneet
+     * bittisarjoja vastaavat merkit. Tämä on alkuperäinen syötteenä ohjelmalle
      * annettu merkkijono.
-     * 
+     *
      * @param bittijono binääriesitys merkkijonomuodossa
      * @param kooditaulu taulukko, joka sisältää kunkin merkin binäärikoodauksen
      * @return palauttaa alkuperäiseen muotoonsa puretun merkkijonon
      */
-
     public static String palautaMerkkijonoksi(String bittijono, String[] kooditaulu) {
         String tulosjono = "";
         String verrattava = "";
@@ -237,16 +323,39 @@ public class HuffmanKoodaus {
         return tulosjono;
 
     }
+
+    public static void puraMerkkijonoksi(BufferedInputStream pakattu, BufferedOutputStream purettu, int jaannosbitit, String[] kooditaulu) throws Exception {
+        String tulosjono = "";
+        String verrattava = "";
+        String puskuri = "";
+        BufferedBitStream bbs = new BufferedBitStream(pakattu, jaannosbitit);
+
+        while (bbs.available() == true) {
+            verrattava += bbs.seuraava();
+            for (int a = 0; a < kooditaulu.length; a++) {
+                if (verrattava.equals(kooditaulu[a])) {
+//                    System.out.println("Löytyi: " + verrattava);
+                    purettu.write(a);
+                    verrattava = "";
+                    break;
+                }
+            }
+
+        }
+        System.out.println(bbs.available());
+
+    }
+
     /**
-     * Metodi toteuttaa purkamisen ensimmäisen vaiheen, eli muuttaa pakatun merkkijonon bittijonoksi.
-     * 
+     * Metodi toteuttaa purkamisen ensimmäisen vaiheen, eli muuttaa pakatun
+     * merkkijonon bittijonoksi.
+     *
      * @param merkkijono pakattu data
-     * @param pituus pakkaamattoman bittijonon pituus, jota käytetään sen selvittämiseen, mitä tehdä
-     * viimeisen, mahdollisesti epätäyden tavun kohdalla
+     * @param pituus pakkaamattoman bittijonon pituus, jota käytetään sen
+     * selvittämiseen, mitä tehdä viimeisen, mahdollisesti epätäyden tavun
+     * kohdalla
      * @return bittiesitys merkkijonona
      */
-    
-
     public static String merkitBittijonoksi(String merkkijono, int pituus) {
         int vajaatavu = pituus % 8;
         String apu;
@@ -269,15 +378,28 @@ public class HuffmanKoodaus {
         return bittijono;
 
     }
-    
+
+    public static String puraBittijonoksi(BufferedInputStream pakattu, BufferedOutputStream purettuBittivirta) throws Exception {
+        String apu = "";
+        String verrattava = "";
+        int i = 0;
+        while (pakattu.available() > 1) {
+
+            apu += Integer.toBinaryString(pakattu.read());
+
+        }
+        return apu;
+
+    }
+
     /**
-     * Metodi muuttaa alkuperäisen datan binääriesityksen jälleen merkkijonomuotoon jakamalla sen
-     * kahdeksan bitin pätkiin ja korvaamalla kunkin pätkän vastaavalla merkillä. Pakkausvaiheen metodi.
-     * 
+     * Metodi muuttaa alkuperäisen datan binääriesityksen jälleen
+     * merkkijonomuotoon jakamalla sen kahdeksan bitin pätkiin ja korvaamalla
+     * kunkin pätkän vastaavalla merkillä. Pakkausvaiheen metodi.
+     *
      * @param bittijono Ykkösiä ja nollia sisältävä merkkijonoesitys.
      * @return merkkijono, bittijono on muutettu tavuittain merkeiksi
      */
-
     public static String bititMerkkijonoksi(String bittijono) {
         int i;
         char merkki;
@@ -304,6 +426,24 @@ public class HuffmanKoodaus {
 
         return tulosjono;
 
+    }
+
+    public static int bittijonoTavuksi(String jono) {
+        int tavu;
+        if (jono.length() == 8) {
+            tavu = Integer.parseInt(jono, 2);
+            return tavu;
+        } else {
+            tavu = Integer.parseInt(jono.substring(0, 8), 2);
+            return tavu;
+        }
+    }
+
+    public static int taydennaVajaaTavu(String jono) {
+        while (jono.length() < 8) {
+            jono = jono + "0";
+        }
+        return Integer.parseInt(jono, 2);
     }
 
 //    public static String[] kanonisoi(int[] pituustaulu, String kooditaulu[]) {
@@ -354,5 +494,4 @@ public class HuffmanKoodaus {
 //        return kanonisoitu;
 //
 //    }
-
 }
