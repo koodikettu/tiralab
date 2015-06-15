@@ -24,7 +24,7 @@ public class BufferedBitStream {
         this.bis = bis;
         this.vajaatavu = vajaatavu;
         if (bis.available() > 0) {
-            System.out.println("Löytyy");
+//            System.out.println("Löytyy");
             tavuBitteina = Integer.toBinaryString(bis.read());
             taydenna();
         } else {

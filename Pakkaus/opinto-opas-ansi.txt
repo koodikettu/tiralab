@@ -1,0 +1,396 @@
+TIETOJENKÄSITTELYTIEDE
+Tietojenkäsittelytieteen laitos
+Exactum (Kumpulan kampus)
+PL 68 (Gustaf Hällströmin katu 2b)
+00014 Helsingin yliopisto
+Puhelinnumero 02941 911 (vaihde), ohivalinta
+02941...
+http://www.cs.helsinki.fi/
+Laitos käyttää verkkosivuja laajasti sekä
+pysyvistä että ajankohtaisista asioista tiedottamiseen.
+Laitoksen kotisivu on osoitteessa
+http://www.cs.helsinki.fi/ ja opiskelun
+kannalta keskeinen informaatio löytyy
+Opiskelu-verkkosivulta
+http://www.cs.helsinki.fi/opiskelu/. Opiskelu-verkkosivulla
+on myös ohje opiskelijoiden
+sähköpostilistalle liittymisestä ja ajankohtaisten
+tapahtumien kalenteri.
+Opintoneuvonta: opintoneuvonta@cs.helsinki.fi,
+puh. 02941 51121. Vastaanottoajat
+ilmoitetaan verkkosivulla http://www.cs.
+helsinki.fi/opintoneuvonta/.
+Opintoesimies (D240a, 2. kerros): Jaakko
+Kurhila, opintoesimies@cs.helsinki.fi, puh. 02941 51386. Vastaanotto ti 13-14 ja to 14-
+15 sekä sopimuksen mukaan.
+Laitoksen johtaja (D240b, 2. kerros): prof.
+Jukka Paakki, johtaja@cs.helsinki.fi, puh.
+02941 51387. Vastaanotto sopimuksen mukaan.
+Tutkintovaatimukset
+Nopeasti kehittyvänä alana tietojenkäsittelytieteen
+tutkintovaatimuksia päivitetään
+säännöllisesti. Tämän opinto-oppaan sisältämät
+tutkintovaatimukset tulevat voimaan
+1.8.2014 ja poikkeavat vuosien 2012–2014
+ja sitä aiempien vuosien tutkintovaatimuksista
+selvästi.
+Näiden tutkintovaatimusten mukaan opiskelevat
+lukuvuonna 2014–2015 ja 2015–
+2016 opintonsa aloittavat opiskelijat. Ennen
+1.8.2014 opintonsa aloittaneet voivat suorittaa
+tutkintonsa aloitusvuotensa tai sen jälkeisten
+tutkintovaatimusten mukaan siten,
+että vanhimmat sovellettavat tutkintovaatimukset
+ovat vuosien 2008-2010 vaatimukset.
+Esitetyt opintokokonaisuuksien laajuudet
+ovat vähimmäislaajuuksia. Pääaineopinnot,
+sivuaineopinnot ja/tai muut opinnot täytyy
+tarvittaessa suorittaa minimivaatimuksia
+laajempina, jotta tutkinnon vaadittu vähimmäislaajuus
+täyttyy.
+LUONNONTIETEIDEN KANDIDAATIN
+TUTKINTO (180 OP)
+1. Pääaineopinnot
+584111 PERUSOPINNOT (25 OP)
+582102 Johdatus tietojenkäsittelytieteeseen,
+5 op
+581325 Ohjelmoinnin perusteet, 5 op
+582103 Ohjelmoinnin jatkokurssi, 5 op
+582104 Ohjelmistotekniikan menetelmät,
+ 5 op
+581328 Tietokantojen perusteet, 5 op
+584213 AINEOPINNOT (63 OP)
+Pakolliset opintojaksot (55 op):
+ 58131 Tietorakenteet ja algoritmit,
+ 8 op
+ 581305 Tietokoneen toiminta, 5 op
+ 582202 Tietoliikenteen perusteet,
+ 6 op
+ 582640 Käyttöjärjestelmät, 8 op
+ 582206 Laskennan mallit, 8 op
+ 581259 Ohjelmistotuotanto, 5 op
+ 581260 Ohjelmistotuotantoprojek-
+ ti, 9 op
+ 582204 Kandidaatintutkielma,
+ 6 op
+ 50036 Kypsyysnäyte, 0 op
+Vähintään kaksi vaihtuvasisältöistä aineopintojen
+harjoitustyötä, yhteensä 8 op.
+Harjoitustöiden sisällöt tarkennetaan vuosittain
+opetusohjelmassa.
+Esimerkkejä:
+30
+tietojenkäsittelytiede
+ 582221 Aineopintojen harjoitustyö:
+Ohjelmointi, 5 op
+ 582203 Aineopintojen harjoitustyö:
+Tietokantasovellus, 5 op
+ 58161 Aineopintojen harjoitustyö:
+Tietorakenteet ja algoritmit,
+ 3 tai 5 op
+ 582364 Aineopintojen harjoitustyö:
+ Tietoliikenne, 3 tai 5 op
+Vuosittain järjestetään useita muita aineopintojen
+kursseja, joilla voi laajentaa aineopintokokonaisuutta.
+Kurssit saattavat sisältää
+syventävissä opinnoissa vaadittavia
+esitietoja.
+2. Sivuaineopinnot (vähintään 50 op)
+Matematiikan tai menetelmätieteiden perusopintokokonaisuus,
+25 op, ja toisen sivuaineen
+perusopintokokonaisuus, 25 op,
+tai
+matematiikan tai menetelmätieteiden perusja
+aineopintokokonaisuudet, 60 op.
+Menetelmätieteiden opintokokonaisuudessa
+on kaikissa tapauksissa oltava vähintään
+10 op matematiikkaa ja vähintään 10 op ti- lastotiedettä.
+Menetelmätieteiden kokonaisuudet eivät saa
+sisältää tietojenkäsittelytieteen opintoja.
+Kaikissa tapauksissa sivuaineopintoihin tu- lee sisältyä matematiikan kurssi Johdatus
+yliopistomatematiikkaan.
+3. Muut opinnot
+Kieliopinnot, 10 op
+582505 Äidinkielinen viestintä, 3 op
+ Toinen kotimainen kieli, 3 op (lähtötaso
+CEFR B1)
+ Vieras kieli, 4 op (englannissa lähtötaso
+CEFR B2, muissa kielissä lähtötaso
+CEFR B1)
+584401 Tieto- ja viestintätekniikan opinnot,
+5 op
+582514 TVT-ajokortti, 3 op
+581324 Tietokone työvälineenä, 1 op
+582506 Tutkimustiedonhaku, 1 op
+584402 Harjoittelu tai työelämään orientoituminen,
+1–7 op
+ 582508 Ohjelmistotuotantoprojektiin liittyvä
+työelämään orientointi, 1 op,
+ tai
+ 582509 Tietotekniikka-alan ammattitehtävissä
+työskentely, 2-6 op
+582507 Henkilökohtainen opintosuunnitelma
+ja osallistuminen opettajatuutorointiin
+(LuK-HOPS), 1 op
+Vapaasti valittavia opintoja niin, että tutkinnon
+laajuus 180 op täyttyy. Nämä voivat olla
+pääaineen tai sivuaineen tai muita opintoja.
+FILOSOFIAN MAISTERIN TUTKINTO
+(120 OP)
+Maisterin tutkinto tietojenkäsittelytieteessä
+voidaan suorittaa neljällä erikoistumislinjalla:
+•	 Algoritminen bioinformatiikka (Algorithmic
+Bioinformatics)
+•	 Algoritmit, data-analytiikka ja koneoppiminen
+(Algorithms, Data Analytics and
+Machine Learning)
+•	 Hajautetut järjestelmät ja tietoliikenne
+(Networking and Services)
+•	 Ohjelmistojärjestelmät
+Opetus- ja tutkintokielet ovat suomi ja ruotsi,
+mutta FM-tutkinnossa ja jatkotutkinnoissa
+tutkintokieli voi olla lisäksi englanti. Filosofian
+maisterin tutkinnon kieli on englanti,
+mikäli pro gradu -tutkielma ja lisäksi vähintään
+50 opintopistettä maisterin tutkinnon
+opinnoista on suoritettu englannin kielellä.
+Linjan Ohjelmistojärjestelmät pakolliset
+kurssit ja suuri osa muista kursseista järjestetään
+suomeksi. Muut linjat ovat englanninkielisiä.
+Mikäli hakija on saanut suomen tai ruotsinkielisen
+koulusivistyksen, häntä koskevat
+seuraavat tutkintosäännön 11 §:n kielitaito- vaatimukset: Opiskelijan on suoritettava toi- sen kotimaisen kielen opinnot ja osoitettava
+kypsyysnäytteellä äidinkielen taito osana
+alempaa tai ylempää korkeakoulututkintoa.
+Maisterin tutkinnon vaatimukset ovat erikoistumislinjakohtaiset
+ja noudattavat seuraavaa
+yhteistä rakennetta.
+31
+tietojenkäsittelytiede
+1. Pääaineopinnot
+AINEOPINNOT
+Erikoistumislinjalla Hajautetut järjestelmät
+ja tietoliikenne vaaditaan aineopintokurssi,
+joka voidaan suorittaa kandidaatin tutkinnossa
+tai maisterin tutkinnossa syventävien
+opintojen lisäksi.
+SYVENTÄVÄT OPINNOT (80 OP)
+Erikoistumislinjakohtaiset pakolliset opinnot,
+8 tai 10 op
+Erikoistumislinjalle soveltuvia valinnaisia
+syventäviä opintoja, 26 tai 24 op
+Seminaareja, 6 op
+50131 Pro gradu -tutkielma, 40 op
+50039 Kypsyysnäyte, 0 op
+2. Sivuaineopinnot
+Erikoistumislinjoilla Algoritminen bioinformatiikka
+sekä Algoritmit, data-analytiikka ja
+koneoppiminen on suosituksia sivuaineopinnoissa.
+Millään erikoistumislinjalla ei
+kuitenkaan vaadita sivuaineopintoja.
+3. Muut opinnot
+582510 Henkilökohtainen opintosuunnitelma
+(FM-HOPS), 1 op
+582519 Scientific Writing for MSc in Computer
+Science, 3 op, mikäli opiskelija
+suorittaa laitoksella vain FMtutkinnon
+ja tekee tutkinnon englannin
+kielellä.
+581324 Computing Tools for CS Studies, 1
+op, mikäli opiskelija suorittaa laitoksella
+vain FM-tutkinnon.
+Englannin kielen opinnot, 0-4 op,
+laitoksella hyväksyttävän henkilö-
+kohtaisen opintosuunnitelman
+(FM-HOPS) mukaisesti.
+584403 Syventävä harjoittelu tai työelä-
+mään orientoivat opinnot, vähintään
+2 op
+ 582511 Tietotekniikka-alan vaativissa
+ammattitehtävissä työskentely, 2-6 op
+tai
+ 582516 Software Factory Work Experience,
+5-7 op
+tai
+ 582515 Tietotekniikka-ala ammattina,
+2 op
+tai
+ 582613 Advanced Internship in Bioinformatics,
+1-3 op
+Vapaasti valittavia opintoja niin, että tutkinnon
+laajuus 120 op täyttyy. Nämä voivat olla
+pääaineen tai sivuaineen tai muita opintoja.
+ERIKOISTUMISLINJAKOHTAISET
+
+TUTKINTOVAATIMUKSET
+Algoritminen bioinformatiikka
+(Algorithmic Bioinformatics)
+1. Pääaineopinnot
+584329 SYVENTÄVÄT OPINNOT
+Pakolliset opinnot, 10 op
+ 582630 Design and Analysis of Algo- rithms, 5 op 582631 Introduction to Machine Lear- ning, 5 op
+Valinnaiset opinnot, 24 op
+Vähintään toinen seuraavista:
+ 582483 Biological Sequence Analysis, 5
+op ja
+ 582676 Project in Biological Sequence
+Analysis, 2 op
+tai
+ 582715 Algorithms in Molecular Biology,
+5 op ja
+ 582716 Project in Algorithms in Molecular
+Biology, 2 op
+ Bioinformatiikan syventäviä opintoja 17
+op laitoksella hyväksyttävän henkilö- kohtaisen opintosuunnitelman (FMHOPS)
+mukaisesti.
+Seminaareja, 6 op
+50131 Pro gradu -tutkielma, 40 op
+50039 Kypsyysnäyte, 0 op
+32
+tietojenkäsittelytiede
+2. Sivuaineopinnot
+Erikoistumislinjan opinnot vaativat hyviä
+matematiikan taitoja ja molekyylibiologian
+perustietoja. Siksi on suositeltavaa, että eri- koistumislinjan opiskelijat suorittavat vähintään
+35 op matematiikan tai tilastotieteen
+opintoja ja vähintään 25 op molekyylibiologian
+tai vastaavia opintoja osana LuK- ja
+FM-tutkintoaan.
+Algoritmit, data-analytiikka ja koneoppiminen
+(Algorithms, Data
+Analytics and Machine Learning)
+1. Pääaineopinnot
+584333 SYVENTÄVÄT OPINNOT
+Pakolliset opinnot, 10 op
+ 582630 Design and Analysis of Algorithms,
+5 op
+ 582631 Introduction to Machine
+Learning, 5 op
+Valinnaiset opinnot, 24 op
+ Vähintään 10 op seuraavista kursseista:
+ 58093 String Processing Algorithms
+ 582634 Data Mining
+ 582636 Probabilistic Models
+ 582487 Data Compression Techniques
+582421 Randomized Algorithms 582456 Approximation Algorithms 582650 Information Theoretic Mo- delling 582669 Supervised Machine Lear- ning 582638 Unsupervised Machine
+Learning 582366 Introduction to Computa- tional Creativity Kaikki näihin kursseihin liittyvät
+projektityökurssit
+ Tietojenkäsittelytieteen syventäviä
+opintoja 14 op laitoksella hyväksyttävän
+henkilökohtaisen opintosuunnitelman
+(FM-HOPS) mukaisesti.
+Seminaareja, 6 op
+50131 Pro gradu -tutkielma, 40 op
+50039 Kypsyysnäyte, 0 op
+2. Sivuaineopinnot
+Erikoistumislinjan opinnot vaativat hyviä
+matematiikan taitoja. Monet linjan kurssit
+vaativat matemaattisia esitietoja. Siksi on
+suositeltavaa, että erikoistumislinjan opiskelijat
+suorittavat vähintään 60 op matematiikan
+ja tilastotieteen opintoja osana LuKja
+FM-tutkintoaan.
+Hajautetut järjestelmät ja tietoliikenne
+(Networking and Services)
+1. Pääaineopinnot
+AINEOPINNOT
+58127 C-ohjelmointi, 5 op (mikäli ei kuulu
+alempaan tutkintoon)
+584334 SYVENTÄVÄT OPINNOT
+Pakolliset opinnot, 10 op
+ 582417 Distributed Systems, 5 op
+ 582665 Distributed Systems Project,
+5 op
+Valinnaiset opinnot, 24 op
+ Vähintään yksi seuraavista:
+ 582641 Service Ecosystems, 5 op 582498 Internet protocols, 5 op
+ 582615 Overlay and P2P Networks,
+5 op
+ 582666 Interactive Systems, 5 op
+ Tietojenkäsittelytieteen syventäviä
+opintoja 19 op laitoksella hyväksyttävän
+henkilökohtaisen opintosuunnitelman
+(FM-HOPS) mukaisesti.
+Seminaareja, 6 op
+50131 Pro gradu -tutkielma, 40 op
+50039 Kypsyysnäyte, 0 op
+Ohjelmistojärjestelmät
+1. Pääaineopinnot
+33
+tietojenkäsittelytiede
+584335 SYVENTÄVÄT OPINNOT
+Pakolliset opinnot, 8 op
+ 581358 Ohjelmistoarkkitehtuurit, 5 op 582663 Ohjelmistoarkkitehtuurien
+harjoitustyö, 3 op
+Valinnaiset opinnot, 26 op
+ Vähintään yksi seuraavista:
+ 581359 Ohjelmistoprosessit ja ohjelmistojen
+laatu, 5 op
+ 582642 Service-Oriented Software
+Engineering with MDE, 5 op
+ 582490 Transaktioiden hallinta,
+ 5 op
+ Tietojenkäsittelytieteen syventäviä
+opintoja 21 op laitoksella hyväksyttävän
+henkilökohtaisen opintosuunnitelman
+(FM-HOPS) mukaisesti.
+Seminaareja, 6 op
+50131 Pro gradu -tutkielma, 40 op
+50039 Kypsyysnäyte, 0 op
+JATKOTUTKINNOT
+FILOSOFIAN LISENSIAATIN
+TUTKINTO
+1. 58090 Tietojenkäsittelytieteen jatko-opinnot,
+60 op (yksityiskohdat kuten filosofian
+tohtorin tutkinnon vaatimuksissa)
+2. Lisensiaatintutkimus
+FILOSOFIAN TOHTORIN TUTKINTO
+1. 58090 Tietojenkäsittelytieteen jatko-opinnot,
+60 op
+58271 Tutkimusalan opinnot, 50 op
+ 582710 Jatko-opintoseminaari,
+ 6 op Muu sisältö sovitaan opintosuunni- telmassa. 58272 Yleiset jatko-opinnot, 10 op
+ Yleisiin jatko-opintoihin tulee sisältyä
+tieteenfilosofian, tutkimusetiikan
+ja yleiseen asiantuntijuuteen
+valmentavia opintoja sekä kansainvälistä
+tieteellistä toimintaa.
+Sisältö ja suoritustavat sovitaan
+opintosuunnitelmassa.
+2. Väitöskirja.
+Jos jatko-opiskelijan perustutkinto on muu
+kuin tietojenkäsittelytieteen maisterin tutkinto,
+opintosuunnitelmaan voidaan edellyttää
+sisällytettäväksi opintoja enemmän kuin 60
+op.
+Tietojenkäsittelytieteen
+584112 PERUSOPINNOT (SIVUAINE)
+(25 OP)
+581325 Ohjelmoinnin perusteet, 5 op
+582104 Ohjelmistotekniikan menetelmät, 5
+op
+Ainakin toinen seuraavista vaihtoehdoista
+ 582103 Ohjelmoinnin jatkokurssi,
+5 op,
+tai
+581328 Tietokantojen perusteet,
+5 op
+Valinnaisia tietojenkäsittelytieteen perus- tai
+aineopintoja, 10 op
+584214 AINEOPINNOT (SIVUAINE)
+(35 OP)
+Tietojenkäsittelytieteen pääaineopintojen
+pakollisia tai valinnaisia aineopintoja, 10 op
+Vapaasti valittavia tietojenkäsittelytieteen
+perus- ja aineopintoja, 25 op
+Sivuaineopintoihin ei kuitenkaan voi sisäl- lyttää ohjelmistotuotantoprojektia eikä kan- didaatintutkielmaa.
+584327 SYVENTÄVÄT OPINNOT
+(SIVUAINE) (60 OP)
+Tietojenkäsittelytieteen syventävät opinnot
+suoritetaan jonkin erikoistumislinjan tutkin- tovaatimuksia soveltaen ja niiden sisällöstä
+sovitaan aina linjan vastuuprofessorin kans- sa. Pääsääntöisesti ne noudattavat seuraa- vaa rakennetta:
+Tietojenkäsittelytieteen syventäviä opintoja,
+37 op
+Seminaareja, 3 op
+584332 Tietojenkäsittelytieteen sivuainetutkielma,
+20 op
