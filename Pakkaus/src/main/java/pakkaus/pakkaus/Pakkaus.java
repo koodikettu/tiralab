@@ -17,6 +17,7 @@ import java.io.FileOutputStream;
 import java.util.Scanner;
 import pakkaus.LempelZiv.LempelZivKoodaus;
 import pakkaus.tarkastaja.Tarkastaja;
+import pakkaus.tiedostonhallinta.Tiedostonkirjoittaja;
 
 /**
  *
@@ -38,9 +39,9 @@ public class Pakkaus {
         Scanner lukija;
         int i;
         long alkuaika, loppuaika;
-        int[] tiheystaulu;
         int[] pituustaulu;
         int pakkaustapa;
+        long alkuperainenPituus=0;
         String[] kooditaulu = new String[256];
         String[] kanonisoituKoodi = new String[256];
         String ktmerkkijono;
@@ -50,6 +51,7 @@ public class Pakkaus {
         long pakkausaika, purkuaika;
         File purettutiedosto;
         Tiedostonlukija alkuperainen, pakattudata, purettudata;
+        Tiedostonkirjoittaja tk;
 
         lukija = new Scanner(System.in);
         System.out.println("Anna pakattavan tiedoston nimi: ");
@@ -69,13 +71,15 @@ public class Pakkaus {
         File kohdetiedosto = new File("pakattu.dat");
         FileOutputStream fos = new FileOutputStream(kohdetiedosto);
         BufferedOutputStream ptuote = new BufferedOutputStream(fos);
+        tk=new Tiedostonkirjoittaja(ptuote);
+        
 
         psyote.mark(10 * 1024 * 1024);
 
-        int alkuperainenPituus = psyote.available();
         if (pakkaustapa == 1) {
+            int[] tiheystaulu = new int[256];
             alkuaika = System.currentTimeMillis();
-            tiheystaulu = HuffmanKoodaus.muodostaTiheystaulu(alkuperainen);
+            alkuperainenPituus = HuffmanKoodaus.muodostaTiheystaulu(alkuperainen, tiheystaulu);
             System.out.println("Tiheystaulu: ");
             for (i = 0; i < tiheystaulu.length; i++) {
                 if (tiheystaulu[i] > 0) {
@@ -148,7 +152,7 @@ public class Pakkaus {
 
         } else {
             alkuaika = System.currentTimeMillis();
-            LempelZivKoodaus.pakkaa(alkuperainen, ptuote);
+            LempelZivKoodaus.pakkaa(alkuperainen, tk);
 
             psyote.close();
             syote.close();
@@ -167,8 +171,9 @@ public class Pakkaus {
             purettutiedosto = new File("purettu.dat");
             FileOutputStream pfos = new FileOutputStream(purettutiedosto);
             BufferedOutputStream purettu = new BufferedOutputStream(pfos);
+            tk = new Tiedostonkirjoittaja(purettu);
             alkuaika = System.currentTimeMillis();
-            LempelZivKoodaus.pura(pakattudata, purettu);
+            LempelZivKoodaus.pura(pakattudata, tk);
             loppuaika = System.currentTimeMillis();
             purkuaika = loppuaika - alkuaika;
 

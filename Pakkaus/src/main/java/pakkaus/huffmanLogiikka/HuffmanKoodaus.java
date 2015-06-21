@@ -45,18 +45,19 @@ public class HuffmanKoodaus {
      */
 
 
-    public static int[] muodostaTiheystaulu(Lukija syote) throws Exception {
+    public static long muodostaTiheystaulu(Lukija syote, int taulu[]) throws Exception {
 
         int i;
-        int[] taulukko = new int[256];
         int b;
+        long laskuri=0;
 
         while (syote.available() > 0) {
             b = syote.read();
-            taulukko[b]++;
+            laskuri++;
+            taulu[b]++;
 
         }
-        return taulukko;
+        return laskuri;
 
     }
 

@@ -39,7 +39,6 @@
                             <include>pakkaus.tarkastaja/*.class</include>
                             <include>pakkaus.omatTietorakenteet/*.class</include>
                             <include>pakkaus.LempelZiv/*.class</include>
-                            <include>pakkaus.tiedostonhallinta/*.class</include>
                         </includes>
                     </instrumentation>
                                    
@@ -56,7 +55,6 @@
                         <param>pakkaus.tarkastaja.*</param>
                         <param>pakkaus.omatTietorakenteet.*</param>
                         <param>pakkaus.LempelZiv.*</param>
-                        <param>pakkaus.tiedostonhallinta.*</param>
 
                     </targetClasses>
                     <targetTests>
@@ -64,7 +62,6 @@
                         <param>pakkaus.tarkastaja.*</param>
                         <param>pakkaus.omatTietorakenteet.*</param>
                         <param>pakkaus.LempelZiv.*</param>
-                        <param>pakkaus.tiedostonhallinta.*</param>
                     </targetTests>
                 </configuration>
 

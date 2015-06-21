@@ -6,6 +6,7 @@ package pakkaus.LempelZiv;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import pakkaus.tiedostonhallinta.Kirjoittaja;
 import pakkaus.tiedostonhallinta.Lukija;
 
 /**
@@ -22,7 +23,7 @@ public class LempelZivKoodaus {
      * @throws Exception 
      */
 
-    public static void pakkaa(Lukija lahde, BufferedOutputStream kohde) throws Exception {
+    public static void pakkaa(Lukija lahde, Kirjoittaja kohde) throws Exception {
         String[] sanakirja = new String[4096];
         int sanakirjaosoitin;
         int i;
@@ -31,7 +32,7 @@ public class LempelZivKoodaus {
         String bittijonoesitys = "";
         String tulosbittijono = "";
 
-        int vajaabitit = 0;
+//        int vajaabitit = 0;
 
         for (i = 0; i < 256; i++) {
             sanakirja[i] = "" + (char) i;
@@ -76,7 +77,7 @@ public class LempelZivKoodaus {
             bittijonoesitys = Integer.toBinaryString(haeSanakirjasta(ljono, sanakirja, sanakirjaosoitin));
             bittijonoesitys = taydenna(bittijonoesitys);
             tulosbittijono += bittijonoesitys;
-            vajaabitit = tulosbittijono.length();
+//            vajaabitit = tulosbittijono.length();
             while (tulosbittijono.length() < 24) {
                 tulosbittijono += "111111111111";
             }
@@ -148,7 +149,7 @@ public class LempelZivKoodaus {
      * @throws Exception 
      */
 
-    public static void kirjoita(BufferedOutputStream kohde, String bittijono) throws Exception {
+    public static void kirjoita(Kirjoittaja kohde, String bittijono) throws Exception {
         int eka, toka, kolmas;
 //        System.out.println("Kirjoitetaan eka: " + Integer.parseInt(bittijono.substring(0,12),2));
 //        System.out.println("Kirjoitetaan toka: " + Integer.parseInt(bittijono.substring(12,24),2));
@@ -172,7 +173,7 @@ public class LempelZivKoodaus {
      * @throws Exception 
      */
 
-    public static void pura(Lukija pakattu, BufferedOutputStream purettu) throws Exception {
+    public static void pura(Lukija pakattu, Kirjoittaja purettu) throws Exception {
         String[] sanakirja = new String[4096];
         Buffered12bitStream syote = new Buffered12bitStream(pakattu);
         String tulosjono = "";

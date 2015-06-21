@@ -61,9 +61,9 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="pakkaus.huffmanLogiikka.HuffmanKoodausTest" name="bittijonoTavuksiTest" time="0"/>
-  <testcase classname="pakkaus.huffmanLogiikka.HuffmanKoodausTest" name="muodostaKooditauluTest" time="0"/>
   <testcase classname="pakkaus.huffmanLogiikka.HuffmanKoodausTest" name="muodostaHuffmanPuuTest" time="0"/>
+  <testcase classname="pakkaus.huffmanLogiikka.HuffmanKoodausTest" name="bittijonoTavuksiTest" time="0.001"/>
+  <testcase classname="pakkaus.huffmanLogiikka.HuffmanKoodausTest" name="muodostaKooditauluTest" time="0"/>
   <testcase classname="pakkaus.huffmanLogiikka.HuffmanKoodausTest" name="muodostaPrioriteettijonoTest" time="0"/>
   <testcase classname="pakkaus.huffmanLogiikka.HuffmanKoodausTest" name="muodostaTiheystauluTest2" time="0"/>
   <testcase classname="pakkaus.huffmanLogiikka.HuffmanKoodausTest" name="muodostaTiheystauluTest1" time="0"/>

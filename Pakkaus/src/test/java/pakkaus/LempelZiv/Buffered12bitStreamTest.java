@@ -49,19 +49,20 @@ public class Buffered12bitStreamTest {
     // public void hello() {}
     @Test
     public void bitinlukuTest() throws Exception {
-        
-        // Tiedoston sisältö on "bA7" eli tavut 98, 65, 55
+
+        // Merkkijonon sisältö on "bA7" eli tavut 98, 65, 55
         // Binääriesitys: 01100010 01000001 00110111
-        
         Merkkijononlukija m = new Merkkijononlukija("bA7");
-        Buffered12bitStream b=new Buffered12bitStream(m);
+        Buffered12bitStream b = new Buffered12bitStream(m);
         int eka = b.next();
         int toka = b.next();
-        
+        // 011000100100 = 1572
+        // 000100110111 = 311
         assertEquals(1572, eka);
         assertEquals(311, toka);
-        
 
         System.out.println("12bittilukija testattu");
     }
+
+
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pakkaus.Tarkastaja;
+package pakkaus.tarkastaja;
 
 import org.junit.After;
 import org.junit.AfterClass;
