@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import pakkaus.tiedostonhallinta.Merkkijononlukija;
 import pakkaus.tiedostonhallinta.Tiedostonlukija;
 
 /**
@@ -52,19 +53,15 @@ public class Buffered12bitStreamTest {
         // Tiedoston sisältö on "bA7" eli tavut 98, 65, 55
         // Binääriesitys: 01100010 01000001 00110111
         
-        File lahdetiedosto = new File("bittienkasittelytesti.txt");
-        FileInputStream syote = new FileInputStream(lahdetiedosto);
-        BufferedInputStream psyote = new BufferedInputStream(syote);
-        Tiedostonlukija t=new Tiedostonlukija(psyote);
-        Buffered12bitStream b=new Buffered12bitStream(t);
+        Merkkijononlukija m = new Merkkijononlukija("bA7");
+        Buffered12bitStream b=new Buffered12bitStream(m);
         int eka = b.next();
         int toka = b.next();
         
         assertEquals(1572, eka);
         assertEquals(311, toka);
         
-        psyote.close();
-        syote.close();
+
         System.out.println("12bittilukija testattu");
     }
 }

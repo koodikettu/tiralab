@@ -57,7 +57,7 @@ public class PrioriteettijonoTest {
         jono.insert(c);
         jono.insert(d);
         jono.insert(e);
-        
+
         jono.tulosta();
 //        System.out.println(jono.delMin().getMerkki());
         assertEquals('c', jono.delMin().getMerkki());
@@ -66,6 +66,32 @@ public class PrioriteettijonoTest {
         assertEquals('e', jono.delMin().getMerkki());
         assertEquals('a', jono.delMin().getMerkki());
         assertEquals('b', jono.delMin().getMerkki());
+
+    }
+
+    @Test
+    public void PrioriteettijonoTest2() {
+        HuffmanSolmu a = new HuffmanSolmu('a', 158, null, null);
+        HuffmanSolmu b = new HuffmanSolmu('b', 15, null, null);
+        HuffmanSolmu c = new HuffmanSolmu('c', 555, null, null);
+        HuffmanSolmu d = new HuffmanSolmu('d', 63, null, null);
+        HuffmanSolmu e = new HuffmanSolmu('e', 554, null, null);
+
+        Prioriteettijono jono = new Prioriteettijono();
+        jono.insert(a);
+        jono.insert(b);
+        jono.insert(c);
+        jono.insert(d);
+        jono.insert(e);
+
+        jono.tulosta();
+//        System.out.println(jono.delMin().getMerkki());
+        assertEquals('b', jono.delMin().getMerkki());
+        jono.tulosta();
+        assertEquals('d', jono.delMin().getMerkki());
+        assertEquals('a', jono.delMin().getMerkki());
+        assertEquals('e', jono.delMin().getMerkki());
+        assertEquals('c', jono.delMin().getMerkki());
 
     }
 
