@@ -19,7 +19,7 @@ import pakkaus.tiedostonhallinta.Tiedostonkirjoittaja;
  *
  * @author Markku
  */
-public class Pakkaus {
+public class Main {
 
     /**
      * Pääohjelma, joka käyttää HuffmanKoodaus-luokan metodeja
