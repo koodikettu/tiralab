@@ -11,7 +11,7 @@ import pakkaus.tiedostonhallinta.Kirjoittaja;
 import pakkaus.tiedostonhallinta.Lukija;
 
 public class HuffmanKoodaus {
-    
+
     /**
      * muodostaTiheystaulu-metodi muodostaa parametrinä annetun merkkijonon
      * pohjalta taulukon, josta käy ilmi jokaisen ASCII-merkin esiintymien
@@ -35,17 +35,17 @@ public class HuffmanKoodaus {
     }
 
     /**
-     * muodostaTiheystaulu-metodi muodostaa parametrinä annetun BufferedInputStreamin
-     * pohjalta taulukon, josta käy ilmi jokaisen ASCII-merkin esiintymien
-     * lukumäärä ko. merkkijonossa. edellisen metodin ylikuormitettu versio, joka ottaa
-     * parametrinä merkkijonomuuttujan sijaan BufferedInputStream-olion
+     * muodostaTiheystaulu-metodi muodostaa parametrinä annetun
+     * BufferedInputStreamin pohjalta taulukon, josta käy ilmi jokaisen
+     * ASCII-merkin esiintymien lukumäärä ko. merkkijonossa. edellisen metodin
+     * ylikuormitettu versio, joka ottaa parametrinä merkkijonomuuttujan sijaan
+     * BufferedInputStream-olion
      *
-     * @param syote BufferedInputStream-olio, jonka avulla luetaan dataa tiedostosta
+     * @param syote BufferedInputStream-olio, jonka avulla luetaan dataa
+     * tiedostosta
      * @return metodi palauttaa eri merkkien esiintymiskerrat sisältävän
      * int-taulukon
      */
-
-
     public static int[] muodostaTiheystaulu(Lukija syote) throws Exception {
 
         int i;
@@ -74,8 +74,6 @@ public class HuffmanKoodaus {
      * @param tiheystaulu; merkkien esiintymistiheydet sisältävä taulukko
      * @return metodi palauttaa muodostetun Huffman-puun juurisolmun
      */
-
-
     public static HuffmanSolmu muodostaHuffmanPuu(int[] tiheystaulu) {
         int i;
         HuffmanSolmu vasen, oikea;
@@ -106,7 +104,6 @@ public class HuffmanKoodaus {
      * @return metodi palauttaa prioriteettijonon, joka sisältää kaikkia
      * merkkijonossa esiintyneitä merkkejä vastaavat HuffmanSolmu-oliot
      */
-
     public static Prioriteettijono muodostaPrioriteettijono(int[] tiheystaulu) {
         int i;
         Prioriteettijono prjono = new Prioriteettijono();
@@ -177,18 +174,38 @@ public class HuffmanKoodaus {
      * @return Paluuarvona kooditaulu merkkijonomuodossa. Merkit erotetaan
      * toisistaan kaksoispisteellä.
      */
-    public static String tallennaKooditaulu(String[] kooditaulu) {
-        String tulos = "";
+    public static String tallennaHeader(String[] kooditaulu, int[] pituustaulu, int alkuperainenPituus) {
+        String tulos = "" + alkuperainenPituus + ":";
+        String apu;
         int i;
         for (i = 0; i < kooditaulu.length; i++) {
             if (kooditaulu[i] != null) {
                 tulos += "" + ((char) i);
-                tulos += kooditaulu[i];
-                tulos += ":";
+                tulos += (char) pituustaulu[i];
+                apu = taydennaBittijono(kooditaulu[i], 32);
+                tulos += (char) Integer.parseInt(apu.substring(0, 8),2);
+                tulos += (char) Integer.parseInt(apu.substring(8, 16),2);
+                tulos += (char) Integer.parseInt(apu.substring(16, 24),2);
+                tulos += (char) Integer.parseInt(apu.substring(24, 32),2);
             }
         }
         tulos += "::";
         return tulos;
+    }
+
+    public static String lueHeader(Lukija lukija) throws Exception {
+        String header = "";
+        char c, prev;
+        prev = (char) lukija.read();
+        c = (char) lukija.read();
+        header = "" + prev + c;
+        while (!(c == ':' && prev == ':')) {
+            prev = c;
+            c = (char) lukija.read();
+            header += c;
+        }
+        return header;
+
     }
 
     /**
@@ -198,40 +215,55 @@ public class HuffmanKoodaus {
      * @param mjono Kooditaulun merkkijonoesitys
      * @return kooditaulun taulukkoesitys
      */
-    public static String[] muodostaKooditauluMerkkijonosta(String mjono) {
-        String[] kooditaulu = new String[256];
+    public static int muodostaKooditauluMerkkijonosta(String mjono, String[] kooditaulu) {
         char c, ed;
-        int pituus;
-        char koodi;
-        String bittijono = "";
+        String pituus = "";
+        int koodinPituus;
+        int arvo;
+        String bittijono;
+        int alkuperaisenPituus;
+        String koodi = "";
+        int tavu1, tavu2, tavu3, tavu4;
         int i = 0;
-        while (i < mjono.length()) {
+        while (mjono.charAt(i) != ':') {
+            pituus += mjono.charAt(i++);
+        }
+        i++;
+        alkuperaisenPituus = Integer.parseInt(pituus);
+        while (i < mjono.length() - 1) {
             c = mjono.charAt(i++);
-            while (mjono.charAt(i) != ':') {
-                bittijono += mjono.charAt(i++);
-            }
-            kooditaulu[c] = bittijono;
-            bittijono = "";
-            i++;
-            if (mjono.charAt(i) == ':' && mjono.charAt(i + 1) == ':') {
+            koodinPituus = (int) mjono.charAt(i++);
+            if (c == ':' && koodinPituus == 58) {
                 break;
             }
-        }
+            tavu1 = (int) mjono.charAt(i++);
+            tavu2 = (int) mjono.charAt(i++);
+            tavu3 = (int) mjono.charAt(i++);
+            tavu4 = (int) mjono.charAt(i++);
+            arvo=tavu4+256*tavu3+256*256*tavu2+256*256*256*tavu1;
 
-        return kooditaulu;
+
+            kooditaulu[c] = taydennaBittijono(arvo, koodinPituus);
+            koodinPituus = 0;
+
+        }
+        return alkuperaisenPituus;
     }
 
-/**
- * Metodi koodaa lähdetiedostosta luettavan datan jokaisen merkin sen kooditaulusta
- * löytyvällä binääriesityksellä ja tallettaa näin saadun datan toiseen tiedostoon.
- * @param syote BufferedInputStream-olio, jonka avulla luetaan dataa tiedostosta.
- * @param tuote BufferedOutputStream-olio, jonka avulla kirjoitetaan dataa tiedostoon.
- * @param kooditaulu jokaisen merkin binäärikoodin sisältävä taulukko
- * @return palauttaa viimeisen mahdollisesti vajaaksi jäävän tavun tehollisten bittien määrän
- * @throws Exception 
- */
-
-
+    /**
+     * Metodi koodaa lähdetiedostosta luettavan datan jokaisen merkin sen
+     * kooditaulusta löytyvällä binääriesityksellä ja tallettaa näin saadun
+     * datan toiseen tiedostoon.
+     *
+     * @param syote BufferedInputStream-olio, jonka avulla luetaan dataa
+     * tiedostosta.
+     * @param tuote BufferedOutputStream-olio, jonka avulla kirjoitetaan dataa
+     * tiedostoon.
+     * @param kooditaulu jokaisen merkin binäärikoodin sisältävä taulukko
+     * @return palauttaa viimeisen mahdollisesti vajaaksi jäävän tavun
+     * tehollisten bittien määrän
+     * @throws Exception
+     */
     public static int koodaaBittijonoksi(Lukija syote, Kirjoittaja tuote, String[] kooditaulu) throws Exception {
         String pakattuBjono = "";
         int tavu;
@@ -268,27 +300,35 @@ public class HuffmanKoodaus {
     }
 
     /**
-     * Metodi lukee dataa pakatusta tiedostosta ja etsii vastaavia bittijaksoja kooditaulusta. Kun
-     * vastaava koodi löytyy, kirjoitetaan vastaava tavu kohdetiedostoon.
-     * @param pakattu BufferedInputStream-olio, jonka avulla luetaan dataa tiedostosta
-     * @param purettu BufferedOutputStream-olio, jonka avulla kirjoitetaan dataa tiedostoon
-     * @param jaannosbitit viimeisessä (vajaassa) tavussa olevien tehollisten bittien määrä
+     * Metodi lukee dataa pakatusta tiedostosta ja etsii vastaavia bittijaksoja
+     * kooditaulusta. Kun vastaava koodi löytyy, kirjoitetaan vastaava tavu
+     * kohdetiedostoon.
+     *
+     * @param pakattu BufferedInputStream-olio, jonka avulla luetaan dataa
+     * tiedostosta
+     * @param purettu BufferedOutputStream-olio, jonka avulla kirjoitetaan dataa
+     * tiedostoon
+     * @param jaannosbitit viimeisessä (vajaassa) tavussa olevien tehollisten
+     * bittien määrä
      * @param kooditaulu kunkin merkin binäärikoodauksen sisältävä taulukko
-     * @throws Exception 
+     * @throws Exception
      */
-
-    public static void puraMerkkijonoksi(Lukija pakattu, Kirjoittaja purettu, int jaannosbitit, String[] kooditaulu) throws Exception {
+    public static void puraMerkkijonoksi(Lukija pakattu, Kirjoittaja purettu, int jaannosbitit, String[] kooditaulu, int alkuperaisenPituus) throws Exception {
         String tulosjono = "";
         String verrattava = "";
         String puskuri = "";
+        int laskuri=0;
         BufferedBitStream bbs = new BufferedBitStream(pakattu, jaannosbitit);
 
         while (bbs.available() == true) {
+            if(laskuri==alkuperaisenPituus)
+                break;
             verrattava += bbs.seuraava();
             for (int a = 0; a < kooditaulu.length; a++) {
                 if (verrattava.equals(kooditaulu[a])) {
 //                    System.out.println("Löytyi: " + verrattava);
                     purettu.write(a);
+                    laskuri++;
                     verrattava = "";
                     break;
                 }
@@ -299,21 +339,14 @@ public class HuffmanKoodaus {
 
     }
 
-    
-
-
-
-    
-    
     /**
-     * 
-     * Metodi muodostaa merkkijonomuuttujassa annetun bittijonon perusteella 8-bittisen
-     * tavun tallennettavaksi binääritiedostoon.
-     * 
+     *
+     * Metodi muodostaa merkkijonomuuttujassa annetun bittijonon perusteella
+     * 8-bittisen tavun tallennettavaksi binääritiedostoon.
+     *
      * @param jono merkkijonona talletettu binääriluku
      * @return parametrin perusteella muodostettu 8-bittinen tavu
      */
-
     public static int bittijonoTavuksi(String jono) {
         int tavu;
         if (jono.length() == 8) {
@@ -324,15 +357,14 @@ public class HuffmanKoodaus {
             return tavu;
         }
     }
-    
+
     /**
-     * Metodi täydentää viimeisen pakattavan tavun, jos siihen ei tule täyttä 8 bittiä.
-     * perään lisätään nollia, kunnes tavussa on 8 bittiä.
-     * 
+     * Metodi täydentää viimeisen pakattavan tavun, jos siihen ei tule täyttä 8
+     * bittiä. perään lisätään nollia, kunnes tavussa on 8 bittiä.
+     *
      * @param jono viimeisen vajaan tavun "teholliset" bitit
      * @return nollilla 8-bittiseksi täydennetty viimeinen tavu
      */
-
     public static int taydennaVajaaTavu(String jono) {
         while (jono.length() < 8) {
             jono = jono + "0";
@@ -340,5 +372,20 @@ public class HuffmanKoodaus {
         return Integer.parseInt(jono, 2);
     }
 
+    public static String taydennaBittijono(int arvo, int pituus) {
+        String tulos = Integer.toBinaryString(arvo);
+        while (tulos.length() < pituus) {
+            tulos = "0" + tulos;
+        }
+        return tulos;
+    }
+
+    public static String taydennaBittijono(String arvo, int pituus) {
+        String tulos = arvo;
+        while (tulos.length() < pituus) {
+            tulos = "0" + tulos;
+        }
+        return tulos;
+    }
 
 }

@@ -90,12 +90,15 @@ public class Pakkaus {
                 }
             }
 
-            ktmerkkijono = HuffmanKoodaus.tallennaKooditaulu(kooditaulu);
+            ktmerkkijono = HuffmanKoodaus.tallennaHeader(kooditaulu, pituustaulu, alkuperainenPituus);
+            for(i=0;i<ktmerkkijono.length();i++) {
+                tk.write(ktmerkkijono.charAt(i));
+            }
             System.out.println("Kooditaulu merkkijonona:");
             System.out.println(ktmerkkijono);
             System.out.println("Kooditaulun merkkkijonoesityksen pituus:");
             System.out.println(ktmerkkijono.length());
-            kooditaulu = HuffmanKoodaus.muodostaKooditauluMerkkijonosta(ktmerkkijono);
+            int dekoodattuPituus = HuffmanKoodaus.muodostaKooditauluMerkkijonosta(ktmerkkijono, kooditaulu2);
 
             System.out.println("Merkkijonosta purettu kooditaulu: ");
             for (i = 0; i < kooditaulu.length; i++) {
@@ -103,11 +106,13 @@ public class Pakkaus {
                     System.out.println(i + " (" + ((char) i) + "): " + kooditaulu[i] + ", pituus: " + pituustaulu[i]);
                 }
             }
+            System.out.println("Alkup. pituus: " + alkuperainenPituus);
+            System.out.println("Dekoodattu pituus: " + dekoodattuPituus);
 
             alkuperainen.reset(); /* Palataan lukemaan lähdetiedostoa alusta */
 
             /* jaannosbitit kertovat viimeisen tallennettavan tavun "tehollisten" bittien määrän */
-            int jaannosbitit = HuffmanKoodaus.koodaaBittijonoksi(alkuperainen, tk, kooditaulu);
+            int jaannosbitit = HuffmanKoodaus.koodaaBittijonoksi(alkuperainen, tk, kooditaulu2);
             loppuaika = System.currentTimeMillis();
 
             /* suljetaan tiedostot */
@@ -121,13 +126,15 @@ public class Pakkaus {
             /* avataan pakattu tiedosto lukemista varten sen purkamiseksi */
             pakattudata = new Tiedostonlukija("pakattu.dat");
             pakattuPituus = pakattudata.available();
-
+            String header=HuffmanKoodaus.lueHeader(pakattudata);
+            System.out.println("Header: " + header);
+            dekoodattuPituus = HuffmanKoodaus.muodostaKooditauluMerkkijonosta(header, kooditaulu2);
             /* avataan uusi tiedosto puretun datan kirjoittamista varten */
             tk = new Tiedostonkirjoittaja("purettu.dat");
 
             System.out.println("Puretaan...");
             alkuaika = System.currentTimeMillis();
-            HuffmanKoodaus.puraMerkkijonoksi(pakattudata, tk, jaannosbitit, kooditaulu);
+            HuffmanKoodaus.puraMerkkijonoksi(pakattudata, tk, jaannosbitit, kooditaulu, dekoodattuPituus);
             System.out.println("Purettu!");
             loppuaika = System.currentTimeMillis();
             pakattudata.close();
