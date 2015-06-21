@@ -49,6 +49,7 @@ public class Main {
         File purettutiedosto;
         Tiedostonlukija alkuperainen, pakattudata, purettudata;
         Tiedostonkirjoittaja tk;
+        
 
         lukija = new Scanner(System.in);
         System.out.println("Anna pakattavan tiedoston nimi: ");
@@ -58,8 +59,8 @@ public class Main {
         System.out.println("2. Lempel-Ziv");
         pakkaustapa = Integer.parseInt(lukija.next());
 
+        
         alkuperainen = new Tiedostonlukija(tiedostonimi);
-
         tk = new Tiedostonkirjoittaja("pakattu.dat");
 
         alkuperainen.mark(5 * 1024 * 1024);
@@ -178,6 +179,7 @@ public class Main {
 
         System.out.print("Tarkistuksen tulos: ");
         System.out.println(Tarkastaja.vertaa(alkuperainen, purettudata));
+        System.out.println("(0 = pakattu ja purettu tiedosto vastaa alkuperäistä tiedostoa.)");
         alkuperainen.close();
         purettudata.close();
 
