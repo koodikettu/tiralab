@@ -5,7 +5,6 @@
  */
 package pakkaus.tarkastaja;
 
-import java.io.BufferedInputStream;
 import pakkaus.tiedostonhallinta.Lukija;
 
 /**

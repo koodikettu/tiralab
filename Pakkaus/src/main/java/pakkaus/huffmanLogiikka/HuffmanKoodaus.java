@@ -4,8 +4,6 @@
  */
 package pakkaus.huffmanLogiikka;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import pakkaus.omatTietorakenteet.Prioriteettijono;
 import pakkaus.tiedostonhallinta.Kirjoittaja;
 import pakkaus.tiedostonhallinta.Lukija;
@@ -320,18 +318,17 @@ public class HuffmanKoodaus {
      * tiedostosta
      * @param purettu Kirjoittaja-olio, jonka avulla kirjoitetaan dataa
      * tiedostoon
-     * @param jaannosbitit viimeisessä (vajaassa) tavussa olevien tehollisten
-     * bittien määrä
+
      * @param kooditaulu kunkin merkin binäärikoodauksen sisältävä taulukko
      * @param alkuperaisenPituus alkuperäisen, pakkaamattoman tiedoston pituus tavuina
      * @throws Exception
      */
-    public static void puraMerkkijonoksi(Lukija pakattu, Kirjoittaja purettu, int jaannosbitit, String[] kooditaulu, int alkuperaisenPituus) throws Exception {
+    public static void puraMerkkijonoksi(Lukija pakattu, Kirjoittaja purettu, String[] kooditaulu, int alkuperaisenPituus) throws Exception {
         String tulosjono = "";
         String verrattava = "";
         String puskuri = "";
         int laskuri=0;
-        BufferedBitStream bbs = new BufferedBitStream(pakattu, jaannosbitit);
+        BufferedBitStream bbs = new BufferedBitStream(pakattu);
 
         while (bbs.available() == true) {
             if(laskuri==alkuperaisenPituus)

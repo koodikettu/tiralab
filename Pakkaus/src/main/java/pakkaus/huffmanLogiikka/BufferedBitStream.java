@@ -5,7 +5,6 @@
  */
 package pakkaus.huffmanLogiikka;
 
-import java.io.BufferedInputStream;
 import pakkaus.tiedostonhallinta.Lukija;
 
 /**
@@ -19,11 +18,10 @@ public class BufferedBitStream {
     private Lukija bis;
     String tavuBitteina;
     int b;
-    int vajaatavu;
 
-    public BufferedBitStream(Lukija bis, int vajaatavu) throws Exception {
+
+    public BufferedBitStream(Lukija bis) throws Exception {
         this.bis = bis;
-        this.vajaatavu = vajaatavu;
         if (bis.available() > 0) {
 //            System.out.println("Löytyy");
             tavuBitteina = Integer.toBinaryString(bis.read());
@@ -62,9 +60,7 @@ public class BufferedBitStream {
             tavuBitteina = Integer.toBinaryString(b);
             taydenna();
 //            System.out.println("Käsittelyssä pakattu: " + b + ", " + tavuBitteina);
-            if (vajaatavu > 0) {
-                tavuBitteina = tavuBitteina.substring(0, vajaatavu);
-            }
+           
 //            System.out.println("Käsitelty: " + tavuBitteina);
             return a;
         } else if (tavuBitteina.length() == 1 && bis.available() > 1) {

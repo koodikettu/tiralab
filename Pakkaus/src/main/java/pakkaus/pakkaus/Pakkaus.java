@@ -1,19 +1,15 @@
 /**
- * Pääohjelmalla voi tällä hetkellä testata tiedoston pakkaamista. Testiaineisto
- * määritellään muuttujassa tiedostonimi. Tähän mennessä havaitut bugit, joita
- * viime viikolla vielä oli, on pääsääntöisesti korjattu.
- *
+ * Pääohjelma mahdollistaa Huffman-koodauksen ja Lempel-Ziv-koodauksen tehokkuuden testaamisen
+ * erilaisilla syötetiedostoilla. Ohjelma suorittaa automaattisesti halutun tiedoston pakkaamisen
+ * sekä purkamisen. Se myös tarkistaa, että purettu data vastaa alkuperäistä pakkaamatonta dataa.
+ * Lisäksi ohjelma laskee algoritmin tehokkuutta kuvaavia tunnuslukuja.
  */
 package pakkaus.pakkaus;
 
 import pakkaus.tiedostonhallinta.Tiedostonlukija;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import pakkaus.huffmanLogiikka.HuffmanSolmu;
 import pakkaus.huffmanLogiikka.HuffmanKoodaus;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.util.Scanner;
 import pakkaus.LempelZiv.LempelZivKoodaus;
 import pakkaus.tarkastaja.Tarkastaja;
@@ -70,6 +66,8 @@ public class Pakkaus {
         alkuperainenPituus = alkuperainen.available();
 
         if (pakkaustapa == 1) {
+            // Huffman-koodaus
+            
             int[] tiheystaulu = new int[256];
 
             alkuaika = System.currentTimeMillis();
@@ -92,14 +90,14 @@ public class Pakkaus {
 //            }
 
             ktmerkkijono = HuffmanKoodaus.tallennaHeader(kooditaulu, pituustaulu, alkuperainenPituus);
-            for(i=0;i<ktmerkkijono.length();i++) {
+            for (i = 0; i < ktmerkkijono.length(); i++) {
                 tk.write(ktmerkkijono.charAt(i));
             }
 //            System.out.println("Kooditaulu merkkijonona:");
 //            System.out.println(ktmerkkijono);
 //            System.out.println("Kooditaulun merkkkijonoesityksen pituus:");
 //            System.out.println(ktmerkkijono.length());
-              HuffmanKoodaus.muodostaKooditauluMerkkijonosta(ktmerkkijono, kooditaulu2);
+            HuffmanKoodaus.muodostaKooditauluMerkkijonosta(ktmerkkijono, kooditaulu2);
 
 //            System.out.println("Merkkijonosta purettu kooditaulu: ");
 //            for (i = 0; i < kooditaulu.length; i++) {
@@ -109,11 +107,9 @@ public class Pakkaus {
 //            }
 //            System.out.println("Alkup. pituus: " + alkuperainenPituus);
 //            System.out.println("Dekoodattu pituus: " + dekoodattuPituus);
-
             alkuperainen.reset(); /* Palataan lukemaan lähdetiedostoa alusta */
 
-            /* jaannosbitit kertovat viimeisen tallennettavan tavun "tehollisten" bittien määrän */
-            int jaannosbitit=HuffmanKoodaus.koodaaBittijonoksi(alkuperainen, tk, kooditaulu2);
+            HuffmanKoodaus.koodaaBittijonoksi(alkuperainen, tk, kooditaulu2);
             loppuaika = System.currentTimeMillis();
 
             /* suljetaan tiedostot */
@@ -126,15 +122,15 @@ public class Pakkaus {
             /* avataan pakattu tiedosto lukemista varten sen purkamiseksi */
             pakattudata = new Tiedostonlukija("pakattu.dat");
             pakattuPituus = pakattudata.available();
-            String header=HuffmanKoodaus.lueHeader(pakattudata);
-            System.out.println("Header: " + header);
+            String header = HuffmanKoodaus.lueHeader(pakattudata);
+//            System.out.println("Header: " + header);
             dekoodattuPituus = HuffmanKoodaus.muodostaKooditauluMerkkijonosta(header, kooditaulu2);
             /* avataan uusi tiedosto puretun datan kirjoittamista varten */
             tk = new Tiedostonkirjoittaja("purettu.dat");
 
             System.out.println("Puretaan...");
             alkuaika = System.currentTimeMillis();
-            HuffmanKoodaus.puraMerkkijonoksi(pakattudata, tk, jaannosbitit, kooditaulu, dekoodattuPituus);
+            HuffmanKoodaus.puraMerkkijonoksi(pakattudata, tk, kooditaulu, dekoodattuPituus);
             System.out.println("Purettu!");
             loppuaika = System.currentTimeMillis();
             pakattudata.close();
@@ -142,6 +138,9 @@ public class Pakkaus {
             purkuaika = loppuaika - alkuaika;
 
         } else {
+            
+            // Lempel-Ziv 
+            
             alkuaika = System.currentTimeMillis();
             LempelZivKoodaus.pakkaa(alkuperainen, tk);
 
@@ -168,6 +167,8 @@ public class Pakkaus {
         System.out.println("Pakatun tiedoston koko: " + pakattuPituus);
         System.out.println("Pakkaamiseen kulunut aika " + pakkausaika + "  ms.");
         System.out.println("Purkamiseen kulunut aika " + purkuaika + "  ms.");
+        System.out.println("Pakkaamisen nopeus " + (double) alkuperainenPituus / pakkausaika + "  tavua/ms.");
+        System.out.println("Purkamisen nopeus " + (double) alkuperainenPituus / purkuaika + "  tavua/ms.");
         System.out.println("Pakkaussuhde: " + (double) pakattuPituus / alkuperainenPituus);
 
         /* Lähdetiedosto, joka on tarkoitus tiivistää: testidata.txt */

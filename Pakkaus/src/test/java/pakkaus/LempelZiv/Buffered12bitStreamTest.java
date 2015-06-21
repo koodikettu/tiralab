@@ -5,9 +5,6 @@
  */
 package pakkaus.LempelZiv;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -15,7 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import pakkaus.tiedostonhallinta.Merkkijononlukija;
-import pakkaus.tiedostonhallinta.Tiedostonlukija;
+
 
 /**
  *

@@ -4,8 +4,6 @@
  */
 package pakkaus.LempelZiv;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import pakkaus.tiedostonhallinta.Kirjoittaja;
 import pakkaus.tiedostonhallinta.Lukija;
 

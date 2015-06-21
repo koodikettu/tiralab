@@ -5,9 +5,6 @@
  */
 package pakkaus.huffmanLogiikka;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -51,7 +48,7 @@ public class BufferedBitStreamTest {
     @Test
     public void bufferedBitStreamTest() throws Exception {
         Merkkijononlukija m = new Merkkijononlukija("bA7");
-        BufferedBitStream bbs = new BufferedBitStream(m, 0);
+        BufferedBitStream bbs = new BufferedBitStream(m);
         String bittijono = "";
         int tavu;
         for (int i = 0; i < 8; i++) {
@@ -75,28 +72,5 @@ public class BufferedBitStreamTest {
 
     }
 
-    @Test
-    public void bufferedBitStreamTest2() throws Exception {
 
-        Merkkijononlukija m = new Merkkijononlukija("R;");
-        BufferedBitStream bbs = new BufferedBitStream(m, 4);
-        String bittijono = "";
-        int tavu;
-        for (int i = 0; i < 8; i++) {
-            bittijono += "" + bbs.seuraava();
-        }
-
-        tavu = Integer.parseInt(bittijono, 2);
-        bittijono = "";
-        assertEquals((int) 'R', tavu);
-        
-        
-        for (int i = 0; i < 4; i++) {
-            bittijono += "" + bbs.seuraava();
-        }
-        tavu = Integer.parseInt(bittijono, 2);
-        assertEquals(3, tavu);
-        
-        assertEquals(bbs.available(),false);
-    }
 }

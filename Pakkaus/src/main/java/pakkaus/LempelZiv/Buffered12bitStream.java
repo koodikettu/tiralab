@@ -6,7 +6,6 @@
  */
 package pakkaus.LempelZiv;
 
-import java.io.BufferedInputStream;
 import pakkaus.tiedostonhallinta.Lukija;
 
 /**
