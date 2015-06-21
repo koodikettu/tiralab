@@ -1,6 +1,7 @@
 /**
  * Tiedostonkirjoittaja-luokka kapseloi sisäänsä tiedostonkäsittelyyn tarvittavat toiminnallisuudet.
- * Se toteuttaa Kirjoittaja-rajapinnan.
+ * Se toteuttaa Kirjoittaja-rajapinnan. Luokka ei sisällä originaalia koodia, vaan se käyttää Javan
+ * valmiita tiedostonkäsittelyluokkia.
  * 
  */
 package pakkaus.tiedostonhallinta;

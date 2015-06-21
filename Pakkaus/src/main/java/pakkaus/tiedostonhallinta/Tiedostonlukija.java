@@ -1,6 +1,7 @@
 /**
  * Tiedostonlukija-luokka kapseloi sisäänsä tiedostojen lukemiseen tarvittavat toiminnallisuudet.
- * Se toteuttaa Lukija-rajapinnan.
+ * Se toteuttaa Lukija-rajapinnan. Luokka ei sisällä originaalia koodia, vaan se käyttää Javan
+ * valmiita tiedostonkäsittelyluokkia.
  * 
  */
 package pakkaus.tiedostonhallinta;
