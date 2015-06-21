@@ -26,8 +26,8 @@ public class Tiedostonlukija implements Lukija {
     }
 
     public Tiedostonlukija(String tiedostoNimi) throws Exception {
-        File lahdetiedosto = new File(tiedostoNimi);
-        FileInputStream syote = new FileInputStream(lahdetiedosto);
+        this.lahdetiedosto = new File(tiedostoNimi);
+        this.syote = new FileInputStream(lahdetiedosto);
         this.bis = new BufferedInputStream(syote);
         tiedostonhallinta = true;
     }
@@ -51,18 +51,18 @@ public class Tiedostonlukija implements Lukija {
 
     }
 
-    public void mark(int a) {
+    public void mark(int a) throws Exception {
         if (tiedostonhallinta == false) {
             return;
         }
-        syote.mark(a);
+        this.bis.mark(a);
     }
 
     public void reset() throws Exception {
         if (tiedostonhallinta == false) {
             return;
         }
-        syote.reset();
+        this.bis.reset();
     }
 
 }

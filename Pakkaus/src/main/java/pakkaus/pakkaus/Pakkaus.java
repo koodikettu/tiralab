@@ -41,7 +41,7 @@ public class Pakkaus {
         long alkuaika, loppuaika;
         int[] pituustaulu;
         int pakkaustapa;
-        long alkuperainenPituus=0;
+        int alkuperainenPituus = 0;
         String[] kooditaulu = new String[256];
         String[] kanonisoituKoodi = new String[256];
         String ktmerkkijono;
@@ -61,25 +61,18 @@ public class Pakkaus {
         System.out.println("2. Lempel-Ziv");
         pakkaustapa = Integer.parseInt(lukija.next());
 
-        /* Lähdetiedosto, joka on tarkoitus tiivistää: testidata.txt */
-        File lahdetiedosto = new File(tiedostonimi);
-        FileInputStream syote = new FileInputStream(lahdetiedosto);
-        BufferedInputStream psyote = new BufferedInputStream(syote);
-        alkuperainen = new Tiedostonlukija(psyote);
+        alkuperainen = new Tiedostonlukija(tiedostonimi);
 
-        /* Tiivistetty lähdetiedosto tallennetaan pakattu.dat -tiedostoon. */
-        File kohdetiedosto = new File("pakattu.dat");
-        FileOutputStream fos = new FileOutputStream(kohdetiedosto);
-        BufferedOutputStream ptuote = new BufferedOutputStream(fos);
-        tk=new Tiedostonkirjoittaja(ptuote);
-        
+        tk = new Tiedostonkirjoittaja("pakattu.dat");
 
-        psyote.mark(10 * 1024 * 1024);
+        alkuperainen.mark(5 * 1024 * 1024);
+        alkuperainenPituus = alkuperainen.available();
 
         if (pakkaustapa == 1) {
             int[] tiheystaulu = new int[256];
+
             alkuaika = System.currentTimeMillis();
-            alkuperainenPituus = HuffmanKoodaus.muodostaTiheystaulu(alkuperainen, tiheystaulu);
+            tiheystaulu = HuffmanKoodaus.muodostaTiheystaulu(alkuperainen);
             System.out.println("Tiheystaulu: ");
             for (i = 0; i < tiheystaulu.length; i++) {
                 if (tiheystaulu[i] > 0) {
@@ -111,76 +104,57 @@ public class Pakkaus {
                 }
             }
 
-            psyote.reset(); /* Palataan lukemaan lähdetiedostoa alusta */
+            alkuperainen.reset(); /* Palataan lukemaan lähdetiedostoa alusta */
 
             /* jaannosbitit kertovat viimeisen tallennettavan tavun "tehollisten" bittien määrän */
-            int jaannosbitit = HuffmanKoodaus.koodaaBittijonoksi(alkuperainen, ptuote, kooditaulu);
+            int jaannosbitit = HuffmanKoodaus.koodaaBittijonoksi(alkuperainen, tk, kooditaulu);
             loppuaika = System.currentTimeMillis();
 
             /* suljetaan tiedostot */
-            psyote.close();
-            syote.close();
-            ptuote.close();
-            fos.close();
+            alkuperainen.close();
+            tk.close();
             System.out.println("Pakattu!");
             System.out.println("Jäännösbitit: " + jaannosbitit);
 
             pakkausaika = loppuaika - alkuaika;
 
             /* avataan pakattu tiedosto lukemista varten sen purkamiseksi */
-            File pakattutiedosto = new File("pakattu.dat");
-            FileInputStream pakattu = new FileInputStream(pakattutiedosto);
-            BufferedInputStream ppakattu = new BufferedInputStream(pakattu);
-            pakattudata = new Tiedostonlukija(ppakattu);
-            pakattuPituus = ppakattu.available();
+            pakattudata = new Tiedostonlukija("pakattu.dat");
+            pakattuPituus = pakattudata.available();
 
             /* avataan uusi tiedosto puretun datan kirjoittamista varten */
-            purettutiedosto = new File("purettu.dat");
-            FileOutputStream pfos = new FileOutputStream(purettutiedosto);
-            BufferedOutputStream purettu = new BufferedOutputStream(pfos);
+            tk = new Tiedostonkirjoittaja("purettu.dat");
 
             System.out.println("Puretaan...");
             alkuaika = System.currentTimeMillis();
-            HuffmanKoodaus.puraMerkkijonoksi(pakattudata, purettu, jaannosbitit, kooditaulu);
+            HuffmanKoodaus.puraMerkkijonoksi(pakattudata, tk, jaannosbitit, kooditaulu);
             System.out.println("Purettu!");
             loppuaika = System.currentTimeMillis();
-            ppakattu.close();
-            pakattu.close();
-            purettu.close();
-            pfos.close();
+            pakattudata.close();
+            tk.close();
             purkuaika = loppuaika - alkuaika;
 
         } else {
             alkuaika = System.currentTimeMillis();
             LempelZivKoodaus.pakkaa(alkuperainen, tk);
 
-            psyote.close();
-            syote.close();
-            ptuote.close();
-            fos.close();
+            alkuperainen.close();
+            tk.close();
             loppuaika = System.currentTimeMillis();
             pakkausaika = loppuaika - alkuaika;
             /* avataan pakattu tiedosto lukemista varten sen purkamiseksi */
-            File pakattutiedosto = new File("pakattu.dat");
-            FileInputStream pakattu = new FileInputStream(pakattutiedosto);
-            BufferedInputStream ppakattu = new BufferedInputStream(pakattu);
-            pakattudata = new Tiedostonlukija(ppakattu);
-            pakattuPituus = ppakattu.available();
+            pakattudata = new Tiedostonlukija("pakattu.dat");
+            pakattuPituus = pakattudata.available();
 
             /* avataan uusi tiedosto puretun datan kirjoittamista varten */
-            purettutiedosto = new File("purettu.dat");
-            FileOutputStream pfos = new FileOutputStream(purettutiedosto);
-            BufferedOutputStream purettu = new BufferedOutputStream(pfos);
-            tk = new Tiedostonkirjoittaja(purettu);
+            tk = new Tiedostonkirjoittaja("purettu.dat");
             alkuaika = System.currentTimeMillis();
             LempelZivKoodaus.pura(pakattudata, tk);
             loppuaika = System.currentTimeMillis();
             purkuaika = loppuaika - alkuaika;
 
-            ppakattu.close();
-            pakattu.close();
-            purettu.close();
-            pfos.close();
+            pakattudata.close();
+            tk.close();
 
         }
         System.out.println("Alkuperäisen tiedoston koko: " + alkuperainenPituus);
@@ -190,22 +164,14 @@ public class Pakkaus {
         System.out.println("Pakkaussuhde: " + (double) pakattuPituus / alkuperainenPituus);
 
         /* Lähdetiedosto, joka on tarkoitus tiivistää: testidata.txt */
-        lahdetiedosto = new File(tiedostonimi);
-        syote = new FileInputStream(lahdetiedosto);
-        psyote = new BufferedInputStream(syote);
-        Tiedostonlukija a = new Tiedostonlukija(psyote);
+        alkuperainen = new Tiedostonlukija(tiedostonimi);
         /* avataan uusi tiedosto puretun datan kirjoittamista varten */
-        purettutiedosto = new File("purettu.dat");
-        FileInputStream tulos = new FileInputStream(purettutiedosto);
-        BufferedInputStream ptulos = new BufferedInputStream(tulos);
-        Tiedostonlukija b = new Tiedostonlukija(ptulos);
+        purettudata = new Tiedostonlukija("purettu.dat");
 
         System.out.print("Tarkistuksen tulos: ");
-        System.out.println(Tarkastaja.vertaa(a, b));
-        psyote.close();
-        syote.close();
-        ptulos.close();
-        tulos.close();
+        System.out.println(Tarkastaja.vertaa(alkuperainen, purettudata));
+        alkuperainen.close();
+        purettudata.close();
 
     }
 
