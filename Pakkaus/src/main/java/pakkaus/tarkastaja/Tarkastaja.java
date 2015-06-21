@@ -1,7 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Tarkastaja-luokan avulla voidaan tarkastaa, onko pakattu ja purettu tiedosto yhtenevä alkuperäisen
+ * tiedoston kanssa.
+ * 
  */
 package pakkaus.tarkastaja;
 
@@ -13,6 +13,15 @@ import pakkaus.tiedostonhallinta.Lukija;
  * @author Markku
  */
 public class Tarkastaja {
+    
+    /**
+     * Vertaa-metodi vertaa parametreinä saatuja Lukija-rajapinnan toteuttavia olioita. Tätä käytetään
+     * sen tutkimiseen, onko pakkauksen ja purkamisen läpikäynyt data yhtenevä alkuperäisen datan kanssa.
+     * @param ensimmainen Olio, jonka avulla päästään tutkimaan alkuperäistä dataa
+     * @param toinen Olio, jonka avulla tutkitaan pakattua ja purettua dataa
+     * @return palauttaa 0, jos parametreinä annettujen olioiden sisältämä data on yhtenevää.
+     * @throws Exception 
+     */
     
     public static int vertaa(Lukija ensimmainen, Lukija toinen) throws Exception {
         int i;

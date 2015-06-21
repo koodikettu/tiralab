@@ -18,8 +18,8 @@ public class LempelZivKoodaus {
     /**
      * pakkaa-metodi pakkaa annetun BufferedInputStreamin avulla luettavan tiedoston sisällön 
      * Lempel-Ziv -koodauksella.
-     * @param lahde alkuperäisen pakattavan tiedoston käsittelyyn käytettävä BufferedInputStream -olio
-     * @param kohde pakatun datan tiedostoon tallentamisessa käytetty BufferedOutputStream -olio
+     * @param lahde alkuperäisen pakattavan tiedoston käsittelyyn käytettävä Lukija -olio
+     * @param kohde pakatun datan tiedostoon tallentamisessa käytetty Kirjoittaja -olio
      * @throws Exception 
      */
 
@@ -144,7 +144,7 @@ public class LempelZivKoodaus {
     /**
      * Metodi kirjoittaa kahdesta 12-bittisestä kokonaisluvusta muodostettavat kolme 8-bittistä
      * tavua kohdetiedostoon.
-     * @param kohde Kohdetiedoston käsittelyssä käytetty BufferedOutputStream -olio.
+     * @param kohde Kohdetiedoston käsittelyssä käytetty Kirjoittaja-olio.
      * @param bittijono Kirjoitettava 24-bittinen bittijono (merkkijonomuodossa).
      * @throws Exception 
      */
@@ -168,8 +168,8 @@ public class LempelZivKoodaus {
     /**
      * Metodi purkaa Lempel-Ziv -pakatun datan parametrinä annetusta tiedostosta ja kirjoittaa puretun
      * datan toiseen tiedostoon
-     * @param pakattu pakatun tiedoston käsittelyyn käytettävä BufferedInputStream -olio
-     * @param purettu puretun datan tiedostoon tallettamiseen käytettävä BufferedOutputStream -olio
+     * @param pakattu pakatun tiedoston käsittelyyn käytettävä Lukija-olio
+     * @param purettu puretun datan tiedostoon tallettamiseen käytettävä Kirjoittaja-olio
      * @throws Exception 
      */
 

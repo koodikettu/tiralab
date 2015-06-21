@@ -1,7 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Kirjoittaja-rajapinta mahdollistaa sekä Tiedostonkirjoittaja- että Merkkijononkirjoittaja-olioiden
+ * antamisen parametreina pakkaustoiminnallisuuden toteuttamiseen osallistuville metodeille.
  */
 package pakkaus.tiedostonhallinta;
 

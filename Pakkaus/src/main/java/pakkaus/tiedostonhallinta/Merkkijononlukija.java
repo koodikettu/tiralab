@@ -1,7 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Merkkijononlukija on testausta helpottava luokka, jonka avulla voidaan antaa syöte
+ * pakkausmetodeille tiedostojen sijaan merkkijonomuodossa.
+ * 
  */
 package pakkaus.tiedostonhallinta;
 

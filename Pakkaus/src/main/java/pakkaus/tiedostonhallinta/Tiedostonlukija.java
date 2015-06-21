@@ -1,7 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Tiedostonlukija-luokka kapseloi sisäänsä tiedostojen lukemiseen tarvittavat toiminnallisuudet.
+ * Se toteuttaa Lukija-rajapinnan.
+ * 
  */
 package pakkaus.tiedostonhallinta;
 
@@ -50,6 +50,12 @@ public class Tiedostonlukija implements Lukija {
         syote.close();
 
     }
+    
+    /**
+     * Merkitsee tiedoston alkukohdan siihen myöhempää palaamista varten.
+     * @param a Luettavien tavujen maksimimäärä, jonka jälkeen kirjanmerkki ei enää toimi.
+     * @throws Exception 
+     */
 
     public void mark(int a) throws Exception {
         if (tiedostonhallinta == false) {
@@ -57,6 +63,11 @@ public class Tiedostonlukija implements Lukija {
         }
         this.bis.mark(a);
     }
+    
+    /**
+     * Palaa luettevassa tiedostossa edellisellä mark()-metodilla merkittyyn kohtaan (alkuun).
+     * @throws Exception 
+     */
 
     public void reset() throws Exception {
         if (tiedostonhallinta == false) {

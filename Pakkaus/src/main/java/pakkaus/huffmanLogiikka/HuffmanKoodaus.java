@@ -41,7 +41,7 @@ public class HuffmanKoodaus {
      * ylikuormitettu versio, joka ottaa parametrinä merkkijonomuuttujan sijaan
      * BufferedInputStream-olion
      *
-     * @param syote BufferedInputStream-olio, jonka avulla luetaan dataa
+     * @param syote Lukija-olio, jonka avulla luetaan dataa
      * tiedostosta
      * @return metodi palauttaa eri merkkien esiintymiskerrat sisältävän
      * int-taulukon
@@ -167,10 +167,13 @@ public class HuffmanKoodaus {
     }
 
     /**
-     * Metodi muodostaa merkkijonoesityksen kooditaulusta.
+     * Metodi muodostaa headerin pakatulle tiedostolle, joka sisältää alkuperäisen datan
+     * pituuden tavuina sekä Huffman-koodauksen purkamisessa tarvittavan kooditaulun.
      *
      * @param kooditaulu Parametrinä annetaan taulukko, joka sisältää kunkin
      * merkin binääriesityksen.
+     * @param pituustaulu Taulukko, joka sisältää kunkin merkin binääriesityksen pituuden bitteinä.
+     * @param alkuperainenPituus alkuperäisen, pakattavan tiedoston pituus tavuina
      * @return Paluuarvona kooditaulu merkkijonomuodossa. Merkit erotetaan
      * toisistaan kaksoispisteellä.
      */
@@ -192,6 +195,14 @@ public class HuffmanKoodaus {
         tulos += "::";
         return tulos;
     }
+    
+    /**
+     * Metodi lukee Lukija-olion kautta saatavan datan alusta headerin ja palauttaa
+     * sen merkkijonomuodossa.
+     * @param lukija Tiedoston lukemiseen käytetty olio.
+     * @return Pakatun tiedoston header.
+     * @throws Exception 
+     */
 
     public static String lueHeader(Lukija lukija) throws Exception {
         String header = "";
@@ -255,9 +266,9 @@ public class HuffmanKoodaus {
      * kooditaulusta löytyvällä binääriesityksellä ja tallettaa näin saadun
      * datan toiseen tiedostoon.
      *
-     * @param syote BufferedInputStream-olio, jonka avulla luetaan dataa
+     * @param syote Lukija-olio, jonka avulla luetaan dataa
      * tiedostosta.
-     * @param tuote BufferedOutputStream-olio, jonka avulla kirjoitetaan dataa
+     * @param tuote Kirjoittaja-olio, jonka avulla kirjoitetaan dataa
      * tiedostoon.
      * @param kooditaulu jokaisen merkin binäärikoodin sisältävä taulukko
      * @return palauttaa viimeisen mahdollisesti vajaaksi jäävän tavun
@@ -302,15 +313,17 @@ public class HuffmanKoodaus {
     /**
      * Metodi lukee dataa pakatusta tiedostosta ja etsii vastaavia bittijaksoja
      * kooditaulusta. Kun vastaava koodi löytyy, kirjoitetaan vastaava tavu
-     * kohdetiedostoon.
+     * kohdetiedostoon. Lukeminen lopetetaan, kun pakattu data loppuu tai on purettu
+     * alkuperäisen tiedoston pituuden verran tavuja.
      *
-     * @param pakattu BufferedInputStream-olio, jonka avulla luetaan dataa
+     * @param pakattu Lukija-olio, jonka avulla luetaan dataa
      * tiedostosta
-     * @param purettu BufferedOutputStream-olio, jonka avulla kirjoitetaan dataa
+     * @param purettu Kirjoittaja-olio, jonka avulla kirjoitetaan dataa
      * tiedostoon
      * @param jaannosbitit viimeisessä (vajaassa) tavussa olevien tehollisten
      * bittien määrä
      * @param kooditaulu kunkin merkin binäärikoodauksen sisältävä taulukko
+     * @param alkuperaisenPituus alkuperäisen, pakkaamattoman tiedoston pituus tavuina
      * @throws Exception
      */
     public static void puraMerkkijonoksi(Lukija pakattu, Kirjoittaja purettu, int jaannosbitit, String[] kooditaulu, int alkuperaisenPituus) throws Exception {
@@ -371,6 +384,13 @@ public class HuffmanKoodaus {
         }
         return Integer.parseInt(jono, 2);
     }
+    
+    /**
+     * Metodi muodostaa halutun pituisen bittijonon, joka kuvaa annettua kokonaislukuarvoa.
+     * @param arvo Bittijonon esittämän kokonaisluvun arvo
+     * @param pituus Bittijonon pituus
+     * @return muodostettu bittijono merkkijonoesityksenä
+     */
 
     public static String taydennaBittijono(int arvo, int pituus) {
         String tulos = Integer.toBinaryString(arvo);
@@ -379,6 +399,13 @@ public class HuffmanKoodaus {
         }
         return tulos;
     }
+    
+        /**
+     * Metodi täydentää merkkijonona annetun bittijonon halutun pituiseksi.
+     * @param arvo Alkuperäinen bittijono merkkijonomuodossa
+     * @param pituus Haluttu bittijonon pituus
+     * @return halutun pituiseksi täydennetty bittijono
+     */
 
     public static String taydennaBittijono(String arvo, int pituus) {
         String tulos = arvo;
