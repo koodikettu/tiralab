@@ -7,7 +7,7 @@ package pakkaus.huffmanLogiikka;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import pakkaus.omatTietorakenteet.Prioriteettijono;
-import pakkaus.pakkaus.Lukija;
+import pakkaus.tiedostonhallinta.Lukija;
 
 public class HuffmanKoodaus {
     

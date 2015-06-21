@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import pakkaus.tiedostonhallinta.Tiedostonlukija;
 
 /**
  *
@@ -54,7 +55,8 @@ public class Buffered12bitStreamTest {
         File lahdetiedosto = new File("bittienkasittelytesti.txt");
         FileInputStream syote = new FileInputStream(lahdetiedosto);
         BufferedInputStream psyote = new BufferedInputStream(syote);
-        Buffered12bitStream b=new Buffered12bitStream(psyote);
+        Tiedostonlukija t=new Tiedostonlukija(psyote);
+        Buffered12bitStream b=new Buffered12bitStream(t);
         int eka = b.next();
         int toka = b.next();
         

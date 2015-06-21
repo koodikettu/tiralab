@@ -14,8 +14,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import pakkaus.pakkaus.Merkkijononlukija;
-import pakkaus.pakkaus.Tiedostonlukija;
+import pakkaus.tiedostonhallinta.Merkkijononlukija;
+import pakkaus.tiedostonhallinta.Tiedostonlukija;
 
 /**
  *

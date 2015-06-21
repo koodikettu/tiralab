@@ -7,6 +7,7 @@
 package pakkaus.LempelZiv;
 
 import java.io.BufferedInputStream;
+import pakkaus.tiedostonhallinta.Lukija;
 
 /**
  *
@@ -14,11 +15,11 @@ import java.io.BufferedInputStream;
  */
 public class Buffered12bitStream {
 
-    BufferedInputStream bis;
+    Lukija bis;
     String puskuri;
     int puskurissaJaljella;
 
-    public Buffered12bitStream(BufferedInputStream bis) throws Exception {
+    public Buffered12bitStream(Lukija bis) throws Exception {
         this.bis = bis;
         puskuri = "";
         if (bis.available() > 2) {

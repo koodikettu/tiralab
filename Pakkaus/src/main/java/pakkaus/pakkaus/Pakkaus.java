@@ -6,6 +6,7 @@
  */
 package pakkaus.pakkaus;
 
+import pakkaus.tiedostonhallinta.Tiedostonlukija;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import pakkaus.huffmanLogiikka.HuffmanSolmu;
@@ -62,7 +63,7 @@ public class Pakkaus {
         File lahdetiedosto = new File(tiedostonimi);
         FileInputStream syote = new FileInputStream(lahdetiedosto);
         BufferedInputStream psyote = new BufferedInputStream(syote);
-        alkuperainen=new Tiedostonlukija(psyote);
+        alkuperainen = new Tiedostonlukija(psyote);
 
         /* Tiivistetty lähdetiedosto tallennetaan pakattu.dat -tiedostoon. */
         File kohdetiedosto = new File("pakattu.dat");
@@ -126,7 +127,7 @@ public class Pakkaus {
             File pakattutiedosto = new File("pakattu.dat");
             FileInputStream pakattu = new FileInputStream(pakattutiedosto);
             BufferedInputStream ppakattu = new BufferedInputStream(pakattu);
-            pakattudata=new Tiedostonlukija(ppakattu);
+            pakattudata = new Tiedostonlukija(ppakattu);
             pakattuPituus = ppakattu.available();
 
             /* avataan uusi tiedosto puretun datan kirjoittamista varten */
@@ -147,7 +148,7 @@ public class Pakkaus {
 
         } else {
             alkuaika = System.currentTimeMillis();
-            LempelZivKoodaus.pakkaa(psyote, ptuote);
+            LempelZivKoodaus.pakkaa(alkuperainen, ptuote);
 
             psyote.close();
             syote.close();
@@ -159,6 +160,7 @@ public class Pakkaus {
             File pakattutiedosto = new File("pakattu.dat");
             FileInputStream pakattu = new FileInputStream(pakattutiedosto);
             BufferedInputStream ppakattu = new BufferedInputStream(pakattu);
+            pakattudata = new Tiedostonlukija(ppakattu);
             pakattuPituus = ppakattu.available();
 
             /* avataan uusi tiedosto puretun datan kirjoittamista varten */
@@ -166,7 +168,7 @@ public class Pakkaus {
             FileOutputStream pfos = new FileOutputStream(purettutiedosto);
             BufferedOutputStream purettu = new BufferedOutputStream(pfos);
             alkuaika = System.currentTimeMillis();
-            LempelZivKoodaus.pura(ppakattu, purettu);
+            LempelZivKoodaus.pura(pakattudata, purettu);
             loppuaika = System.currentTimeMillis();
             purkuaika = loppuaika - alkuaika;
 
@@ -186,13 +188,15 @@ public class Pakkaus {
         lahdetiedosto = new File(tiedostonimi);
         syote = new FileInputStream(lahdetiedosto);
         psyote = new BufferedInputStream(syote);
+        Tiedostonlukija a = new Tiedostonlukija(psyote);
         /* avataan uusi tiedosto puretun datan kirjoittamista varten */
         purettutiedosto = new File("purettu.dat");
         FileInputStream tulos = new FileInputStream(purettutiedosto);
         BufferedInputStream ptulos = new BufferedInputStream(tulos);
+        Tiedostonlukija b = new Tiedostonlukija(ptulos);
 
         System.out.print("Tarkistuksen tulos: ");
-        System.out.println(Tarkastaja.vertaa(psyote, ptulos));
+        System.out.println(Tarkastaja.vertaa(a, b));
         psyote.close();
         syote.close();
         ptulos.close();

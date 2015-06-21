@@ -6,6 +6,7 @@
 package pakkaus.tarkastaja;
 
 import java.io.BufferedInputStream;
+import pakkaus.tiedostonhallinta.Lukija;
 
 /**
  *
@@ -13,7 +14,7 @@ import java.io.BufferedInputStream;
  */
 public class Tarkastaja {
     
-    public static int vertaa(BufferedInputStream ensimmainen, BufferedInputStream toinen) throws Exception {
+    public static int vertaa(Lukija ensimmainen, Lukija toinen) throws Exception {
         int i;
         int eka, toka;
         while(ensimmainen.available()!=0) {

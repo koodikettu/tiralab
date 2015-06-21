@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pakkaus.pakkaus;
+package pakkaus.tiedostonhallinta;
 
 import java.io.BufferedInputStream;
 

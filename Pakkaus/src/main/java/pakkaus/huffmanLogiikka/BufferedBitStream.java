@@ -6,7 +6,7 @@
 package pakkaus.huffmanLogiikka;
 
 import java.io.BufferedInputStream;
-import pakkaus.pakkaus.Lukija;
+import pakkaus.tiedostonhallinta.Lukija;
 
 /**
  * Luokka lukee BufferedInputStreamistä dataa tavu kerrallaan ja tallettaa sen

@@ -6,6 +6,7 @@ package pakkaus.LempelZiv;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import pakkaus.tiedostonhallinta.Lukija;
 
 /**
  *
@@ -21,7 +22,7 @@ public class LempelZivKoodaus {
      * @throws Exception 
      */
 
-    public static void pakkaa(BufferedInputStream lahde, BufferedOutputStream kohde) throws Exception {
+    public static void pakkaa(Lukija lahde, BufferedOutputStream kohde) throws Exception {
         String[] sanakirja = new String[4096];
         int sanakirjaosoitin;
         int i;
@@ -171,7 +172,7 @@ public class LempelZivKoodaus {
      * @throws Exception 
      */
 
-    public static void pura(BufferedInputStream pakattu, BufferedOutputStream purettu) throws Exception {
+    public static void pura(Lukija pakattu, BufferedOutputStream purettu) throws Exception {
         String[] sanakirja = new String[4096];
         Buffered12bitStream syote = new Buffered12bitStream(pakattu);
         String tulosjono = "";
