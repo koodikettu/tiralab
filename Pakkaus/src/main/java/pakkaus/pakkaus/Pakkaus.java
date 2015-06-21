@@ -48,6 +48,7 @@ public class Pakkaus {
         int pakattuPituus;
         long pakkausaika, purkuaika;
         File purettutiedosto;
+        Tiedostonlukija alkuperainen, pakattudata, purettudata;
 
         lukija = new Scanner(System.in);
         System.out.println("Anna pakattavan tiedoston nimi: ");
@@ -61,6 +62,7 @@ public class Pakkaus {
         File lahdetiedosto = new File(tiedostonimi);
         FileInputStream syote = new FileInputStream(lahdetiedosto);
         BufferedInputStream psyote = new BufferedInputStream(syote);
+        alkuperainen=new Tiedostonlukija(psyote);
 
         /* Tiivistetty lähdetiedosto tallennetaan pakattu.dat -tiedostoon. */
         File kohdetiedosto = new File("pakattu.dat");
@@ -72,7 +74,7 @@ public class Pakkaus {
         int alkuperainenPituus = psyote.available();
         if (pakkaustapa == 1) {
             alkuaika = System.currentTimeMillis();
-            tiheystaulu = HuffmanKoodaus.muodostaTiheystaulu(psyote);
+            tiheystaulu = HuffmanKoodaus.muodostaTiheystaulu(alkuperainen);
             System.out.println("Tiheystaulu: ");
             for (i = 0; i < tiheystaulu.length; i++) {
                 if (tiheystaulu[i] > 0) {
@@ -107,7 +109,7 @@ public class Pakkaus {
             psyote.reset(); /* Palataan lukemaan lähdetiedostoa alusta */
 
             /* jaannosbitit kertovat viimeisen tallennettavan tavun "tehollisten" bittien määrän */
-            int jaannosbitit = HuffmanKoodaus.koodaaBittijonoksi(psyote, ptuote, kooditaulu);
+            int jaannosbitit = HuffmanKoodaus.koodaaBittijonoksi(alkuperainen, ptuote, kooditaulu);
             loppuaika = System.currentTimeMillis();
 
             /* suljetaan tiedostot */
@@ -124,6 +126,7 @@ public class Pakkaus {
             File pakattutiedosto = new File("pakattu.dat");
             FileInputStream pakattu = new FileInputStream(pakattutiedosto);
             BufferedInputStream ppakattu = new BufferedInputStream(pakattu);
+            pakattudata=new Tiedostonlukija(ppakattu);
             pakattuPituus = ppakattu.available();
 
             /* avataan uusi tiedosto puretun datan kirjoittamista varten */
@@ -133,7 +136,7 @@ public class Pakkaus {
 
             System.out.println("Puretaan...");
             alkuaika = System.currentTimeMillis();
-            HuffmanKoodaus.puraMerkkijonoksi(ppakattu, purettu, jaannosbitit, kooditaulu);
+            HuffmanKoodaus.puraMerkkijonoksi(pakattudata, purettu, jaannosbitit, kooditaulu);
             System.out.println("Purettu!");
             loppuaika = System.currentTimeMillis();
             ppakattu.close();

@@ -7,6 +7,7 @@ package pakkaus.huffmanLogiikka;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import pakkaus.omatTietorakenteet.Prioriteettijono;
+import pakkaus.pakkaus.Lukija;
 
 public class HuffmanKoodaus {
     
@@ -44,7 +45,7 @@ public class HuffmanKoodaus {
      */
 
 
-    public static int[] muodostaTiheystaulu(BufferedInputStream syote) throws Exception {
+    public static int[] muodostaTiheystaulu(Lukija syote) throws Exception {
 
         int i;
         int[] taulukko = new int[256];
@@ -230,7 +231,7 @@ public class HuffmanKoodaus {
  */
 
 
-    public static int koodaaBittijonoksi(BufferedInputStream syote, BufferedOutputStream tuote, String[] kooditaulu) throws Exception {
+    public static int koodaaBittijonoksi(Lukija syote, BufferedOutputStream tuote, String[] kooditaulu) throws Exception {
         String pakattuBjono = "";
         int tavu;
         int b;
@@ -275,7 +276,7 @@ public class HuffmanKoodaus {
      * @throws Exception 
      */
 
-    public static void puraMerkkijonoksi(BufferedInputStream pakattu, BufferedOutputStream purettu, int jaannosbitit, String[] kooditaulu) throws Exception {
+    public static void puraMerkkijonoksi(Lukija pakattu, BufferedOutputStream purettu, int jaannosbitit, String[] kooditaulu) throws Exception {
         String tulosjono = "";
         String verrattava = "";
         String puskuri = "";
