@@ -1,1 +1,1 @@
-Tiralab - Aineopintojen harjoitustyö: tietorakenteet ja algoritmit
+Tiralab - Aineopintojen harjoitustyö: tietorakenteet ja algoritmit - Juhannus!
